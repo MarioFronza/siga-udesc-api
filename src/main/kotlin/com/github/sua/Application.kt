@@ -1,5 +1,6 @@
 package com.github.sua
 
+import com.github.sua.http.plugins.configureDI
 import com.github.sua.http.plugins.configureRouting
 import com.github.sua.http.plugins.configureSerialization
 import com.github.sua.http.server.HttpServer
@@ -10,6 +11,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    configureDI()
     configureRouting()
     configureSerialization()
 }
