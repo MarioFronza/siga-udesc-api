@@ -1,6 +1,6 @@
 package com.github.sua.usecase.dto.input
 
-data class StudentInfoInput(
+data class SigaCredentialInput(
     val cpf: String,
-    val password: String
+    val password: String,
 )
