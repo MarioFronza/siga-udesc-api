@@ -7,7 +7,7 @@ class CookieStep(
     private val connectorClient: ExtractorHttpClient,
 ) : Step() {
 
-    fun doRequest() = connectorClient.get(COOKIE_STEP_URL, emptyMap()).getStepResponse()
+    fun doRequest() = connectorClient.get(COOKIE_STEP_URL).getStepResponse()
 
     companion object {
         const val COOKIE_STEP_URL = "sigaSecurityG5"
