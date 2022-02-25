@@ -1,6 +1,7 @@
 package com.github.sua.extraction.extractor.cookie
 
 import com.github.sua.extraction.dto.StepResponse
+import com.github.sua.extraction.exception.ExtractorException
 import com.github.sua.extraction.extractor.cookie.dto.output.CookieExtractorOutput
 import com.github.sua.extraction.parser.cookie.CookieParser
 import com.github.sua.extraction.step.login.CookieStep
@@ -15,7 +16,7 @@ class CookieExtractor(
             is StepResponse.StepSuccess -> {
                 cookieParser.extractAction(response.payload)
             }
-            else -> throw Exception("Cookie parser unexpected error")
+            else -> throw ExtractorException("Cookie extractor unexpected error")
         }
         return CookieExtractorOutput(url = actionUrl)
     }
