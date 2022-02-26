@@ -16,7 +16,7 @@ class CookieParserTest {
         val cookieResponse = getFileContent("login/cookie_step_response.html")
         val expected = "/sigaSecurityG5/login.jsf;jsessionid=1FBF366F2EDCDB2985BD1207F3A3F53D.ap004"
 
-        val actionUrl = parser.extractAction(cookieResponse)
+        val actionUrl = parser.extractActionUrl(cookieResponse)
 
         assertEquals(expected, actionUrl)
     }
@@ -26,7 +26,7 @@ class CookieParserTest {
         val cookieResponse = "invalid response"
 
         assertThrows(ParserException::class.java) {
-            parser.extractAction(cookieResponse)
+            parser.extractActionUrl(cookieResponse)
         }
     }
 

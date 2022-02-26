@@ -1,8 +1,7 @@
 package com.github.sua.http.plugins
 
 import com.github.sua.extraction.DefaultSemesterResultsExtraction
-import com.github.sua.extraction.extractor.cookie.CookieExtractor
-import com.github.sua.extraction.misc.httpclient.ExtractorHttpClient
+import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.misc.httpclient.ktor.KtorHttpClient
 import com.github.sua.extraction.parser.cookie.CookieParser
 import com.github.sua.extraction.step.login.CookieStep
@@ -24,7 +23,7 @@ fun Application.configureDI() {
 val appModule = module(createdAtStart = true) {
     single<RetrieveStudentInfo>()
 
-    single<ExtractorHttpClient> { KtorHttpClient() }
+    single<ConnectorHttpClient> { KtorHttpClient() }
     single { CookieStep(get()) }
     single { CookieParser() }
     single { CookieExtractor(get(), get()) }

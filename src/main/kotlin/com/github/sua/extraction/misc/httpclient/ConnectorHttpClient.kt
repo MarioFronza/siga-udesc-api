@@ -1,16 +1,16 @@
 package com.github.sua.extraction.misc.httpclient
 
-interface ExtractorHttpClient {
+interface ConnectorHttpClient {
 
     fun get(
         endpoint: String,
         headers: Map<String, String> = emptyMap()
-    ): StepHttpResponse
+    ): ConnectorHttpResponse
 
     fun post(
         endpoint: String,
         headers: Map<String, String> = emptyMap(),
-        body: String
-    ): StepHttpResponse
+        body: Any
+    ): ConnectorHttpResponse
 
 }

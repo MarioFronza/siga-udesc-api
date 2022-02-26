@@ -1,6 +1,6 @@
 package com.github.sua.extraction.misc.httpclient
 
-data class StepHttpResponse(
+data class ConnectorHttpResponse(
     val responseContentType: String?,
     val statusCode: Int,
     val headers: Map<String, String>,

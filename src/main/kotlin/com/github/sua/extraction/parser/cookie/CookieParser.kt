@@ -5,7 +5,7 @@ import org.jsoup.Jsoup
 
 class CookieParser {
 
-    fun extractAction(responseContent: String): String {
+    fun extractActionUrl(responseContent: String): String {
         val document = Jsoup.parse(responseContent)
         val form = document.getElementById("controleSessao") ?: throw ParserException("Invalid document id")
         return form.attr("action")

@@ -1,10 +1,10 @@
 package com.github.sua.extraction.step.login
 
-import com.github.sua.extraction.misc.httpclient.ExtractorHttpClient
+import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
 
 class CookieStep(
-    private val connectorClient: ExtractorHttpClient,
+    private val connectorClient: ConnectorHttpClient,
 ) : Step() {
 
     fun doRequest() = connectorClient.get(COOKIE_STEP_URL).getStepResponse()
