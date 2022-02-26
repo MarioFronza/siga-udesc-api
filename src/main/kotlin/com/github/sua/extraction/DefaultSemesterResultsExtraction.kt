@@ -1,13 +1,13 @@
 package com.github.sua.extraction
 
+import com.github.sua.entity.student.SigaCredential
 import com.github.sua.extraction.extractor.dashboard.DashboardExtractor
+import com.github.sua.extraction.extractor.dashboard.dto.DashboardExtractorParams
 import com.github.sua.extraction.extractor.dto.DefaultExtractorParams
 import com.github.sua.extraction.extractor.login.CookieExtractor
 import com.github.sua.extraction.extractor.login.LoginExtractor
 import com.github.sua.extraction.extractor.login.LoginRedirectExtractor
 import com.github.sua.extraction.extractor.login.dto.LoginExtractorParams
-import com.github.sua.extraction.step.dashboard.DashboardRedirectStep
-import com.github.sua.extraction.step.dashboard.DashboardStep
 import com.github.sua.usecase.dto.input.SemesterResultsInput
 import com.github.sua.usecase.extraction.SemesterResultsExtraction
 
@@ -19,26 +19,28 @@ class DefaultSemesterResultsExtraction(
     private val dashboardExtractor: DashboardExtractor
 ) : SemesterResultsExtraction {
 
-    private var defaultExtractorParams = DefaultExtractorParams()
 
     override fun extract(input: SemesterResultsInput) {
-        cookieExtractor.extract().also { updateExtractorParams(it) }
-        loginExtractor.extract(
-            LoginExtractorParams(
-                studentCpf = input.sigaCredential.cpf,
-                studentPassword = input.sigaCredential.password,
-                defaultParams = defaultExtractorParams
-            )
-        ).also { updateExtractorParams(it) }
-        loginRedirectExtractor.extract(defaultExtractorParams).also { updateExtractorParams(it) }
-        dashboardRedirectExtractor.extract(defaultExtractorParams).also { updateExtractorParams(it) }
-
-        val dashboardResponse = dashboardExtractor.extract(defaultExtractorParams)
+        val extractionParams = extractLogin(credential = input.sigaCredential)
+        val dashboardResponse = extractDashboard(extractionParams)
         print(dashboardResponse)
     }
 
-    private fun updateExtractorParams(newParams: DefaultExtractorParams) {
-        defaultExtractorParams = newParams
+    private fun extractLogin(credential: SigaCredential): DefaultExtractorParams {
+        val cookieResponse = cookieExtractor.extract()
+        val loginResponse = loginExtractor.extract(loginParamsFrom(cookieResponse, credential))
+        return loginRedirectExtractor.extract(loginResponse)
     }
+
+    private fun extractDashboard(params: DefaultExtractorParams): DashboardExtractorParams {
+        val dashboardRedirectResponse = dashboardRedirectExtractor.extract(params)
+        return dashboardExtractor.extract(dashboardRedirectResponse)
+    }
+
+    private fun loginParamsFrom(params: DefaultExtractorParams, credential: SigaCredential) = LoginExtractorParams(
+        studentCpf = credential.cpf,
+        studentPassword = credential.password,
+        defaultParams = params
+    )
 
 }

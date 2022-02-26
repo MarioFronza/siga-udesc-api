@@ -4,7 +4,7 @@ import com.github.sua.extraction.step.StepResponse.StepError
 import com.github.sua.extraction.step.StepResponse.StepSuccess
 import com.github.sua.extraction.exception.ExtractorException
 import com.github.sua.extraction.exception.ParserException
-import com.github.sua.extraction.extractor.dto.ExtractorOutput
+import com.github.sua.extraction.extractor.dto.DefaultExtractorParams
 import com.github.sua.extraction.extractor.login.CookieExtractor
 import com.github.sua.extraction.parser.cookie.CookieParser
 import com.github.sua.extraction.step.login.CookieStep
@@ -26,10 +26,10 @@ class CookieExtractorTest {
         val payload = "success"
         val actionUrl = "action url"
 
-        every { cookieStep.doRequest() } returns StepSuccess(payload = payload)
+        every { cookieStep.doRequest() } returns StepSuccess(payload = payload, headers = emptyMap())
         every { cookieParser.extractActionUrl(payload) } returns actionUrl
 
-        val expected = ExtractorOutput(url = actionUrl)
+        val expected = DefaultExtractorParams(endpoint = actionUrl)
 
         val actual = cookieExtractor.extract()
 
@@ -52,7 +52,7 @@ class CookieExtractorTest {
     fun `should throw ParseException when cookie parser fails`() {
         val payload = "success with invalid format"
 
-        every { cookieStep.doRequest() } returns StepSuccess(payload = payload)
+        every { cookieStep.doRequest() } returns StepSuccess(payload = payload, headers = emptyMap())
         every { cookieParser.extractActionUrl(payload) } throws ParserException("parse exception")
 
         assertThrows(ParserException::class.java) {

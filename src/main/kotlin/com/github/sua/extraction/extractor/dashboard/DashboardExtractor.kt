@@ -1,7 +1,7 @@
 package com.github.sua.extraction.extractor.dashboard
 
 import com.github.sua.extraction.exception.ExtractorException
-import com.github.sua.extraction.extractor.dashboard.dto.DashboardExtractorResponse
+import com.github.sua.extraction.extractor.dashboard.dto.DashboardExtractorParams
 import com.github.sua.extraction.extractor.dto.DefaultExtractorParams
 import com.github.sua.extraction.parser.dashboard.DashboardParser
 import com.github.sua.extraction.step.dashboard.DashboardStep
@@ -12,9 +12,9 @@ class DashboardExtractor(
     private val dashboardParser: DashboardParser
 ) {
 
-    fun extract(params: DefaultExtractorParams): DashboardExtractorResponse {
+    fun extract(params: DefaultExtractorParams): DashboardExtractorParams {
         return when (val response = dashboardStep.doRequest(params)) {
-            is StepSuccess -> DashboardExtractorResponse(
+            is StepSuccess -> DashboardExtractorParams(
                 studentName = dashboardParser.extractStudentName(response.payload),
                 defaultParams = params.copy(
                     sessionId = response.getSessionId(),

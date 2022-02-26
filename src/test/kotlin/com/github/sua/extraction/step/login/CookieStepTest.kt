@@ -28,7 +28,7 @@ class CookieStepTest {
             isSuccessful = true
         )
 
-        val expected = StepSuccess(payload = "SUCCESS RESPONSE")
+        val expected = StepSuccess(payload = "SUCCESS RESPONSE", headers = emptyMap())
         val actual = step.doRequest()
 
         assertEquals(expected, actual)
