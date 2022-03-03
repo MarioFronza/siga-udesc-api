@@ -1,10 +1,14 @@
 package com.github.sua.http.plugins
 
 import com.github.sua.extraction.DefaultSemesterResultsExtraction
+import com.github.sua.extraction.extractor.dashboard.DashboardExtractor
 import com.github.sua.extraction.extractor.login.CookieExtractor
+import com.github.sua.extraction.extractor.login.LoginExtractor
+import com.github.sua.extraction.extractor.login.LoginRedirectExtractor
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.misc.httpclient.ktor.KtorHttpClient
 import com.github.sua.extraction.parser.cookie.CookieParser
+import com.github.sua.extraction.parser.dashboard.DashboardParser
 import com.github.sua.extraction.step.dashboard.DashboardRedirectStep
 import com.github.sua.extraction.step.dashboard.DashboardStep
 import com.github.sua.extraction.step.login.CookieStep
@@ -35,9 +39,15 @@ val appModule = module(createdAtStart = true) {
     single { DashboardStep(get()) }
     single { DashboardRedirectStep(get()) }
 
-
     single { CookieParser() }
+    single { DashboardParser() }
+
     single { CookieExtractor(get(), get()) }
-    single<SemesterResultsExtraction> { DefaultSemesterResultsExtraction(get(), get(), get(), get(), get()) }
+    single { LoginExtractor(get()) }
+    single { LoginRedirectExtractor(get()) }
+    single { DashboardExtractor(get(), get()) }
+    single<SemesterResultsExtraction> {
+        DefaultSemesterResultsExtraction(get(), get(), get(), get(), get())
+    }
     single { RetrieveSemesterResults(get()) }
 }
