@@ -19,7 +19,6 @@ class DefaultSemesterResultsExtraction(
     private val dashboardExtractor: DashboardExtractor
 ) : SemesterResultsExtraction {
 
-
     override fun extract(input: SemesterResultsInput) {
         val extractionParams = extractLogin(credential = input.sigaCredential)
         val dashboardResponse = extractDashboard(extractionParams)
