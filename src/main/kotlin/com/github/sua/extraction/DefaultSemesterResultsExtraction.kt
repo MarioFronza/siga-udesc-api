@@ -8,6 +8,9 @@ import com.github.sua.extraction.extractor.login.CookieExtractor
 import com.github.sua.extraction.extractor.login.LoginExtractor
 import com.github.sua.extraction.extractor.login.LoginRedirectExtractor
 import com.github.sua.extraction.extractor.login.dto.LoginExtractorParams
+import com.github.sua.extraction.extractor.semesterresults.SemesterResultsExtractor
+import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResultExtractorParams
+import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResultPeriod
 import com.github.sua.usecase.dto.input.SemesterResultsInput
 import com.github.sua.usecase.extraction.SemesterResultsExtraction
 
@@ -16,13 +19,17 @@ class DefaultSemesterResultsExtraction(
     private val loginExtractor: LoginExtractor,
     private val loginRedirectExtractor: LoginRedirectExtractor,
     private val dashboardRedirectExtractor: LoginRedirectExtractor,
-    private val dashboardExtractor: DashboardExtractor
+    private val dashboardExtractor: DashboardExtractor,
+    private val semesterResultsExtractor: SemesterResultsExtractor
 ) : SemesterResultsExtraction {
 
-    override fun extract(input: SemesterResultsInput) {
+    override fun extract(input: SemesterResultsInput): SemesterResultPeriod {
         val extractionParams = extractLogin(credential = input.sigaCredential)
         val dashboardResponse = extractDashboard(extractionParams)
-        print(dashboardResponse)
+        val semesterResultsParams = SemesterResultExtractorParams(
+            periodIdentified = "${input.period.year}/${input.period.term}"
+        )
+        return semesterResultsExtractor.extract(dashboardResponse.defaultParams, semesterResultsParams)
     }
 
     private fun extractLogin(credential: SigaCredential): DefaultExtractorParams {

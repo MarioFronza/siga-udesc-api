@@ -1,13 +1,13 @@
 package com.github.sua.extraction.parser.semesterresults
 
-import com.github.sua.usecase.dto.output.PeriodicalResultsOutput
-import com.github.sua.usecase.dto.output.SemesterResultOutput
+import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResult
+import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResultPeriod
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
 class SemesterResultsParser {
 
-    fun extractSemesterResults(responseContent: String, periodIdentified: String): SemesterResultsResponse {
+    fun extractSemesterResultsInfo(responseContent: String, periodIdentified: String): SemesterResultsResponse {
         val document = Jsoup.parse(responseContent)
         val termSelect = document.getElementById("lPeriodoLetivo")!!
         val courseSelect = document.getElementById("lCurso")!!
@@ -30,9 +30,9 @@ class SemesterResultsParser {
         return secondItem.text()
     }
 
-    private fun extractSemesterResults(resultSpan: Element): MutableList<SemesterResult> {
+    private fun extractSemesterResults(resultSpan: Element): MutableList<SemesterResultOutput> {
         val table = resultSpan.select("center > table.delimitador > tbody").first()!!
-        val semesterResults = mutableListOf<SemesterResult>()
+        val semesterResults = mutableListOf<SemesterResultOutput>()
         table.children().mapIndexed { index, row ->
             if (row.childrenSize() == 10 && index != 0) {
                 semesterResults.add(extractSemesterResultsData(row))
@@ -41,7 +41,7 @@ class SemesterResultsParser {
         return semesterResults
     }
 
-    private fun extractSemesterResultsData(subjectRow: Element): SemesterResult {
+    private fun extractSemesterResultsData(subjectRow: Element): SemesterResultOutput {
         val subjectName = subjectRow.child(0).text()
         val groupName = subjectRow.child(1).text()
         val finalGrade = try {
@@ -61,7 +61,7 @@ class SemesterResultsParser {
             0.0
         }
         val result = subjectRow.child(9).text()
-        return SemesterResult(
+        return SemesterResultOutput(
             subjectName = subjectName,
             groupName = groupName,
             finalGrade = finalGrade,
@@ -74,16 +74,16 @@ class SemesterResultsParser {
 
     data class SemesterResultsResponse(
         val period: String,
-        val semesterResults: List<SemesterResult>,
+        val semesterResults: List<SemesterResultOutput>,
         val course: String
     ) {
-        fun toSemesterResultsPeriod() = PeriodicalResultsOutput(
+        fun toSemesterResultsPeriod() = SemesterResultPeriod(
             period = period,
             semesterResults = semesterResults.map { it.toSemesterResultOutput() }
         )
     }
 
-    data class SemesterResult(
+    data class SemesterResultOutput(
         val subjectName: String,
         val groupName: String,
         val finalGrade: Double,
@@ -92,7 +92,7 @@ class SemesterResultsParser {
         val attendancePercentage: Double,
         val result: String,
     ) {
-        fun toSemesterResultOutput() = SemesterResultOutput(
+        fun toSemesterResultOutput() = SemesterResult(
             subjectName = subjectName,
             groupName = groupName,
             finalGrade = finalGrade,
