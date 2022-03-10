@@ -4,6 +4,8 @@ import com.github.sua.extraction.extractor.dto.DefaultExtractorParams
 import com.github.sua.extraction.step.StepResponse
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class DashboardRedirectStep(
     private val connectorClient: ConnectorHttpClient
@@ -27,7 +29,7 @@ class DashboardRedirectStep(
         return connectorClient.post(
             endpoint = DASHBOARD_REDIRECT_STEP_URL,
             headers = headers,
-            body = body
+            body = Json.encodeToString(body)
         ).getStepResponse()
     }
 

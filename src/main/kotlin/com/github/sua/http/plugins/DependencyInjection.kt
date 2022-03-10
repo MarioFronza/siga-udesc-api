@@ -2,6 +2,7 @@ package com.github.sua.http.plugins
 
 import com.github.sua.extraction.DefaultSemesterResultsExtraction
 import com.github.sua.extraction.extractor.dashboard.DashboardExtractor
+import com.github.sua.extraction.extractor.dashboard.DashboardRedirectExtractor
 import com.github.sua.extraction.extractor.login.CookieExtractor
 import com.github.sua.extraction.extractor.login.LoginExtractor
 import com.github.sua.extraction.extractor.login.LoginRedirectExtractor
@@ -52,6 +53,7 @@ val appModule = module(createdAtStart = true) {
     single { LoginRedirectExtractor(get()) }
     single { DashboardExtractor(get(), get()) }
     single { SemesterResultsExtractor(get(), get()) }
+    single { DashboardRedirectExtractor(get()) }
     single<SemesterResultsExtraction> {
         DefaultSemesterResultsExtraction(get(), get(), get(), get(), get(), get())
     }

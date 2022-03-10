@@ -14,7 +14,9 @@ class CookieExtractor(
     fun extract(): DefaultExtractorParams {
         return when (val response = cookieStep.doRequest()) {
             is StepResponse.StepSuccess -> DefaultExtractorParams(
-                endpoint = cookieParser.extractActionUrl(response.payload)
+                endpoint = cookieParser.extractActionUrl(response.payload),
+                viewState = response.getViewState(),
+                sessionId = response.getSessionId()
             )
             else -> throw ExtractorException("Cookie extractor unexpected error")
         }

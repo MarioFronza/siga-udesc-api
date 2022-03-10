@@ -4,6 +4,8 @@ import com.github.sua.extraction.extractor.login.dto.LoginExtractorParams
 import com.github.sua.extraction.step.StepResponse
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class LoginStep(
     private val connectorClient: ConnectorHttpClient
@@ -31,7 +33,7 @@ class LoginStep(
         return connectorClient.post(
             endpoint = params.defaultParams.endpoint,
             headers = headers,
-            body = body
+            body = Json.encodeToString(body)
         ).getStepResponse()
     }
 

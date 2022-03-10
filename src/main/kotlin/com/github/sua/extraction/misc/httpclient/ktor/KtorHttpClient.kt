@@ -26,7 +26,7 @@ class KtorHttpClient : ConnectorHttpClient {
         }
     }
 
-    override fun post(endpoint: String, headers: Map<String, String>, body: Any): ConnectorHttpResponse {
+    override fun post(endpoint: String, headers: Map<String, String>, body: String): ConnectorHttpResponse {
         return runBlocking {
             val httpResponse: HttpResponse = client.post(SIGA_BASE_URL + endpoint) {
                 headers {
