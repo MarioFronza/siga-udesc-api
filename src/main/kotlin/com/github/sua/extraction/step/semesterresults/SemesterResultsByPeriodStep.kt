@@ -5,8 +5,6 @@ import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResultExt
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
 import com.github.sua.extraction.step.StepResponse
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 class SemesterResultsByPeriodStep(
     private val httpClient: ConnectorHttpClient
@@ -37,7 +35,7 @@ class SemesterResultsByPeriodStep(
         return httpClient.post(
             endpoint = SEMESTER_RESULTS_BY_PERIOD_STEP_URL,
             headers = headers,
-            body = Json.encodeToString(body)
+            body = body
         ).getStepResponse()
     }
 

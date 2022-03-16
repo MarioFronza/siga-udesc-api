@@ -5,7 +5,9 @@ import com.github.sua.extraction.misc.httpclient.ConnectorHttpResponse
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
+import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
 
 class KtorHttpClient : ConnectorHttpClient {
@@ -26,7 +28,7 @@ class KtorHttpClient : ConnectorHttpClient {
         }
     }
 
-    override fun post(endpoint: String, headers: Map<String, String>, body: String): ConnectorHttpResponse {
+    override fun post(endpoint: String, headers: Map<String, String>, body: Map<String, String>): ConnectorHttpResponse {
         return runBlocking {
             val httpResponse: HttpResponse = client.post(SIGA_BASE_URL + endpoint) {
                 headers {
@@ -34,7 +36,11 @@ class KtorHttpClient : ConnectorHttpClient {
                         header(it.key, it.value)
                     }
                 }
-                this.body = body
+                this.body = FormDataContent(Parameters.build {
+                    body.entries.forEach {
+                        append(it.key, it.value)
+                    }
+                })
             }
             val responseString = httpResponse.receive<String>()
             httpResponse.toCustomHttpResponse(body = responseString)

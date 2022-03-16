@@ -10,7 +10,7 @@ interface ConnectorHttpClient {
     fun post(
         endpoint: String,
         headers: Map<String, String> = emptyMap(),
-        body: String
+        body: Map<String, String>
     ): ConnectorHttpResponse
 
 }

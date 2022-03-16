@@ -8,7 +8,7 @@ import io.ktor.util.*
 fun HttpResponse.toCustomHttpResponse(body: String) = ConnectorHttpResponse(
     responseContentType = contentType().toString(),
     statusCode = status.value,
-    headers = headers.flattenEntries().toMap(),
+    headers = headers.flattenEntries().groupBy({ it.first }, { it.second }),
     body = body,
     isSuccessful = status.value in 200..299
 )

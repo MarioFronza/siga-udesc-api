@@ -5,7 +5,7 @@ import com.github.sua.extraction.parser.ExtractorParser
 
 sealed class StepResponse {
 
-    data class StepSuccess(val payload: String, val headers: Map<String, String>) : StepResponse() {
+    data class StepSuccess(val payload: String, val headers: Map<String, List<String>>) : StepResponse() {
         private val extractorParser by lazy { ExtractorParser() }
 
         fun getSessionId(position: Int = 1) = getHeaderByPosition(headers, position)
@@ -16,9 +16,10 @@ sealed class StepResponse {
 
         fun getEndpoint() = extractorParser.parseEndpoint(payload)
 
-        private fun getHeaderByPosition(headers: Map<String, String>, position: Int): String {
-            val etts = headers.getValue(COOKIE_HEADER_KEY)[position].toString()
-            return etts.split(";").first()
+        private fun getHeaderByPosition(headers: Map<String, List<String>>, position: Int): String {
+            val header =
+                headers[COOKIE_HEADER_KEY]?.filterIndexed { index, _ -> index == position } ?: throw Exception("oi")
+            return header.first().split(";").first()
         }
     }
 

@@ -29,10 +29,11 @@ dependencies {
     implementation("io.insert-koin:koin-core:$koin_version")
     implementation("io.ktor:ktor-locations:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("org.jsoup:jsoup:1.14.3")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation("io.insert-koin:koin-test:$koin_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
-    testImplementation("io.mockk:mockk:1.12.2")
+    testImplementation("io.mockk:mockk:1.12.3")
 }

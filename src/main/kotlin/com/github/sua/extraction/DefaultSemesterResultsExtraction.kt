@@ -35,7 +35,8 @@ class DefaultSemesterResultsExtraction(
 
     private fun extractLogin(credential: SigaCredential): DefaultExtractorParams {
         val cookieResponse = cookieExtractor.extract()
-        return loginExtractor.extract(loginParamsFrom(cookieResponse, credential))
+        val loginRedirectExtractorParams = loginExtractor.extract(loginParamsFrom(cookieResponse, credential))
+        return loginRedirectExtractor.extract(loginRedirectExtractorParams)
     }
 
     private fun extractDashboard(params: DefaultExtractorParams): DashboardExtractorParams {
