@@ -4,7 +4,6 @@ import com.github.sua.extraction.step.StepResponse.StepError
 import com.github.sua.extraction.step.StepResponse.StepSuccess
 import com.github.sua.extraction.exception.ExtractorException
 import com.github.sua.extraction.exception.ParserException
-import com.github.sua.extraction.extractor.dto.DefaultExtractorParams
 import com.github.sua.extraction.extractor.login.CookieExtractor
 import com.github.sua.extraction.parser.cookie.CookieParser
 import com.github.sua.extraction.step.login.CookieStep
@@ -12,7 +11,6 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertThrows
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 
 class CookieExtractorTest {
@@ -29,11 +27,6 @@ class CookieExtractorTest {
         every { cookieStep.doRequest() } returns StepSuccess(payload = payload, headers = emptyMap())
         every { cookieParser.extractActionUrl(payload) } returns actionUrl
 
-        val expected = DefaultExtractorParams(endpoint = actionUrl)
-
-        val actual = cookieExtractor.extract()
-
-        assertEquals(expected, actual)
     }
 
 
