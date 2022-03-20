@@ -55,7 +55,7 @@ To start the application, execute a Gradle Wrapper *run* task.
       "semesterResults": [
         {
           "subjectName": "Tests",
-          "groupName": "2019/2",
+          "groupName": "ESO06 2021/2",
           "finalGrade": 10.0,
           "courseLoad": 72,
           "absencesCount": 0,
