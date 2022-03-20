@@ -12,6 +12,6 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     configureDI()
-    configureRouting()
     configureSerialization()
+    configureRouting()
 }

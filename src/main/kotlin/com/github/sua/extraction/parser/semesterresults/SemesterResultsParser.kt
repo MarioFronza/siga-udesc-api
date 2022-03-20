@@ -1,23 +1,40 @@
 package com.github.sua.extraction.parser.semesterresults
 
 import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResult
-import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResultPeriod
+import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResultsResponse
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
 class SemesterResultsParser {
 
-    fun extractSemesterResultsInfo(responseContent: String, periodIdentified: String): SemesterResultsResponse {
+    fun extractSemesterResultsInfo(responseContent: String, periodIdentified: String): SemesterResultsOutput {
         val document = Jsoup.parse(responseContent)
         val termSelect = document.getElementById("lPeriodoLetivo")!!
         val courseSelect = document.getElementById("lCurso")!!
         val resultSpan = document.getElementById("resultado")!!
 
-        return SemesterResultsResponse(
+        return SemesterResultsOutput(
             period = extractPeriod(termSelect, periodIdentified),
             course = extractCourse(courseSelect),
             semesterResults = extractSemesterResults(resultSpan)
         )
+    }
+
+    fun extractPeriods(responseContent: String): Map<String, String> {
+        val document = Jsoup.parse(responseContent)
+        val periodsSelect = document.getElementById("lPeriodoLetivo")
+        val periods = periodsSelect?.getElementsByAttribute("value")
+        val periodMap = mutableMapOf<String, String>()
+        periods?.map {
+            periodMap[it.text()] = it.attr("value")
+        }
+        return periodMap.filter { it.key != "Extensão" }
+    }
+
+    fun extractSemesterResultsUrl(responseContent: String): String {
+        val document = Jsoup.parse(responseContent)
+        val input = document.getElementById("formPrincipal:linkAbre")
+        return input?.attr("value")?.substringAfter("/") ?: throw Exception("Invalid document key")
     }
 
     private fun extractPeriod(termSelect: Element, periodIdentified: String): String {
@@ -30,7 +47,7 @@ class SemesterResultsParser {
         return secondItem.text()
     }
 
-    private fun extractSemesterResults(resultSpan: Element): MutableList<SemesterResultOutput> {
+    private fun extractSemesterResults(resultSpan: Element): List<SemesterResultOutput> {
         val table = resultSpan.select("center > table.delimitador > tbody").first()!!
         val semesterResults = mutableListOf<SemesterResultOutput>()
         table.children().mapIndexed { index, row ->
@@ -72,14 +89,15 @@ class SemesterResultsParser {
         )
     }
 
-    data class SemesterResultsResponse(
+    data class SemesterResultsOutput(
         val period: String,
-        val semesterResults: List<SemesterResultOutput>,
-        val course: String
+        val course: String,
+        val semesterResults: List<SemesterResultOutput>
     ) {
-        fun toSemesterResultsPeriod() = SemesterResultPeriod(
+        fun toSemesterResultsPeriod() = SemesterResultsResponse(
             period = period,
-            semesterResults = semesterResults.map { it.toSemesterResultOutput() }
+            course = course,
+            semesterResults = semesterResults.map { it.toSemesterResult() }
         )
     }
 
@@ -92,7 +110,7 @@ class SemesterResultsParser {
         val attendancePercentage: Double,
         val result: String,
     ) {
-        fun toSemesterResultOutput() = SemesterResult(
+        fun toSemesterResult() = SemesterResult(
             subjectName = subjectName,
             groupName = groupName,
             finalGrade = finalGrade,

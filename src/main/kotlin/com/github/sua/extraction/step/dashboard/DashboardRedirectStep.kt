@@ -1,6 +1,6 @@
 package com.github.sua.extraction.step.dashboard
 
-import com.github.sua.extraction.extractor.dto.DefaultExtractorParams
+import com.github.sua.extraction.extractor.dashboard.DashboardRedirectExtractorRequest
 import com.github.sua.extraction.step.StepResponse
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
@@ -9,9 +9,9 @@ class DashboardRedirectStep(
     private val connectorClient: ConnectorHttpClient
 ) : Step() {
 
-    fun doRequest(params: DefaultExtractorParams): StepResponse {
+    fun doRequest(request: DashboardRedirectExtractorRequest): StepResponse {
         val headers = mapOf(
-            "Cookie" to params.sessionId,
+            "Cookie" to request.sessionId,
         )
 
         val body = mapOf(
@@ -21,7 +21,7 @@ class DashboardRedirectStep(
             "javax.faces.partial.render" to "@none",
             "formRedirect:j_idt31" to "formRedirect:j_idt31",
             "formRedirect" to "formRedirect",
-            "javax.faces.ViewState" to params.viewState,
+            "javax.faces.ViewState" to request.viewState,
         )
 
         return connectorClient.post(

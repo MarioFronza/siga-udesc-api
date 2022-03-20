@@ -1,8 +1,6 @@
 package com.github.sua.extraction.extractor.dashboard
 
 import com.github.sua.extraction.exception.ExtractorException
-import com.github.sua.extraction.extractor.dashboard.dto.DashboardExtractorParams
-import com.github.sua.extraction.extractor.dto.DefaultExtractorParams
 import com.github.sua.extraction.parser.dashboard.DashboardParser
 import com.github.sua.extraction.step.dashboard.DashboardStep
 import com.github.sua.extraction.step.StepResponse.StepSuccess
@@ -12,18 +10,25 @@ class DashboardExtractor(
     private val dashboardParser: DashboardParser
 ) {
 
-    fun extract(params: DefaultExtractorParams): DashboardExtractorParams {
-        return when (val response = dashboardStep.doRequest(params)) {
-            is StepSuccess -> DashboardExtractorParams(
+    fun extract(request: DashboardExtractorRequest): DashboardExtractorResponse {
+        return when (val response = dashboardStep.doRequest(request)) {
+            is StepSuccess -> DashboardExtractorResponse(
                 studentName = dashboardParser.extractStudentName(response.payload),
-                defaultParams = params.copy(
-                    sessionId = response.getSessionId(),
-                    endpoint = dashboardParser.extractSemesterResultsUrl(response.payload),
-                    etts = response.getEtts()
-                )
+                endpoint = dashboardParser.extractDashboardSemesterResultsUrl(response.payload)
             )
             else -> throw ExtractorException("Dashboard extractor unexpected error")
         }
     }
 
 }
+
+data class DashboardExtractorRequest(
+    val endpoint: String,
+    val sessionId: String,
+    val etts: String,
+)
+
+data class DashboardExtractorResponse(
+    val studentName: String,
+    val endpoint: String
+)

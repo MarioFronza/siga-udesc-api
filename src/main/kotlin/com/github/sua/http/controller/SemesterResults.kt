@@ -27,7 +27,7 @@ fun Route.semesterResults(
         )
     )
 
-    service.retrieve(input)
+    val response = service.retrieve(input)
 
-    call.respond(mapOf("retrieve" to "ok"))
+    call.respond(response)
 }

@@ -1,6 +1,6 @@
 package com.github.sua.extraction.step.login
 
-import com.github.sua.extraction.extractor.login.dto.LoginExtractorParams
+import com.github.sua.extraction.extractor.login.LoginExtractorRequest
 import com.github.sua.extraction.step.StepResponse
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
@@ -9,9 +9,9 @@ class LoginStep(
     private val connectorClient: ConnectorHttpClient
 ) : Step() {
 
-    fun doRequest(params: LoginExtractorParams): StepResponse {
+    fun doRequest(request: LoginExtractorRequest): StepResponse {
         val headers = mapOf(
-            "Cookie" to params.defaultParams.sessionId,
+            "Cookie" to " cookie_mentorweb_consent_accepted=YES; ${request.sessionId}",
         )
 
         val body = mapOf(
@@ -21,15 +21,15 @@ class LoginStep(
             "javax.faces.partial.render" to "loginForm:realizaLogin",
             "loginForm:realizaLogin" to "loginForm:realizaLogin",
             "tipoLogin" to "PADRAO",
-            "login" to params.studentCpf,
-            "senha" to params.studentPassword,
+            "login" to request.studentCpf,
+            "senha" to request.studentPassword,
             "mantemConectado" to "S",
             "loginForm" to "loginForm",
-            "javax.faces.ViewState" to params.defaultParams.viewState,
+            "javax.faces.ViewState" to request.viewState,
         )
 
         return connectorClient.post(
-            endpoint = params.defaultParams.endpoint,
+            endpoint = request.endpoint,
             headers = headers,
             body = body
         ).getStepResponse()

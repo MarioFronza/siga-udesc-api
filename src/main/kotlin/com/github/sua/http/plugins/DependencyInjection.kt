@@ -6,6 +6,8 @@ import com.github.sua.extraction.extractor.dashboard.DashboardRedirectExtractor
 import com.github.sua.extraction.extractor.login.CookieExtractor
 import com.github.sua.extraction.extractor.login.LoginExtractor
 import com.github.sua.extraction.extractor.login.LoginRedirectExtractor
+import com.github.sua.extraction.extractor.semesterresults.DashboardSemesterResultsExtractor
+import com.github.sua.extraction.extractor.semesterresults.SemesterResultsByPeriodExtractor
 import com.github.sua.extraction.extractor.semesterresults.SemesterResultsExtractor
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.misc.httpclient.ktor.KtorHttpClient
@@ -17,7 +19,9 @@ import com.github.sua.extraction.step.dashboard.DashboardStep
 import com.github.sua.extraction.step.login.CookieStep
 import com.github.sua.extraction.step.login.LoginRedirectStep
 import com.github.sua.extraction.step.login.LoginStep
+import com.github.sua.extraction.step.semesterresults.DashboardSemesterResultsStep
 import com.github.sua.extraction.step.semesterresults.SemesterResultsByPeriodStep
+import com.github.sua.extraction.step.semesterresults.SemesterResultsStep
 import com.github.sua.usecase.extraction.SemesterResultsExtraction
 import com.github.sua.usecase.retrieve.RetrieveSemesterResults
 import com.github.sua.usecase.retrieve.RetrieveStudentInfo
@@ -32,7 +36,6 @@ fun Application.configureDI() {
     }
 }
 
-
 val appModule = module(createdAtStart = true) {
     single<RetrieveStudentInfo>()
 
@@ -43,6 +46,8 @@ val appModule = module(createdAtStart = true) {
     single { DashboardStep(get()) }
     single { DashboardRedirectStep(get()) }
     single { SemesterResultsByPeriodStep(get()) }
+    single { DashboardSemesterResultsStep(get()) }
+    single { SemesterResultsStep(get()) }
 
     single { CookieParser() }
     single { DashboardParser() }
@@ -54,8 +59,10 @@ val appModule = module(createdAtStart = true) {
     single { DashboardExtractor(get(), get()) }
     single { SemesterResultsExtractor(get(), get()) }
     single { DashboardRedirectExtractor(get()) }
+    single { DashboardSemesterResultsExtractor(get(), get()) }
+    single { SemesterResultsByPeriodExtractor(get(), get()) }
     single<SemesterResultsExtraction> {
-        DefaultSemesterResultsExtraction(get(), get(), get(), get(), get(), get())
+        DefaultSemesterResultsExtraction(get(), get(), get(), get(), get(), get(), get(), get())
     }
     single { RetrieveSemesterResults(get()) }
 }

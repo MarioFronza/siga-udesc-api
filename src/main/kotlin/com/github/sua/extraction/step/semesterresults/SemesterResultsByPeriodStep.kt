@@ -1,7 +1,6 @@
 package com.github.sua.extraction.step.semesterresults
 
-import com.github.sua.extraction.extractor.dto.DefaultExtractorParams
-import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResultExtractorParams
+import com.github.sua.extraction.extractor.semesterresults.SemesterResultsByPeriodExtractorRequest
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
 import com.github.sua.extraction.step.StepResponse
@@ -10,9 +9,9 @@ class SemesterResultsByPeriodStep(
     private val httpClient: ConnectorHttpClient
 ) : Step() {
 
-    fun doRequest(params: DefaultExtractorParams, semesterResultsParams: SemesterResultExtractorParams): StepResponse {
+    fun doRequest(request: SemesterResultsByPeriodExtractorRequest): StepResponse {
         val headers = mapOf(
-            "Cookie" to "${params.sessionId}; ECS=S; ${params.etts}"
+            "Cookie" to "${request.sessionId}; ECS=S; ${request.etts}"
         )
 
         val body = mapOf(
@@ -22,7 +21,7 @@ class SemesterResultsByPeriodStep(
             "detCorrPlc" to "",
             "indExcDetPlc" to "",
             "evento" to "Executar Consulta",
-            "lPeriodoLetivo" to semesterResultsParams.periodIdentified,
+            "lPeriodoLetivo" to request.periodIdentified,
             "lCurso" to "",
             "estadoJanelaimportacao" to "fecha",
             "caracterSep" to "",

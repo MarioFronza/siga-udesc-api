@@ -9,7 +9,7 @@ class DashboardParser {
         val document = Jsoup.parse(responseContent)
         val li = document.getElementById("formMenu:menu_3_3") ?: throw ParserException("Invalid document id")
         val a = li.children()
-        return a.attr("href").substringAfter(BASE_URL)
+        return a.attr("href").substringAfter("/")
     }
 
     fun extractSemesterResultsUrl(responseContent: String): String {
@@ -22,10 +22,6 @@ class DashboardParser {
         val document = Jsoup.parse(responseContent)
         val label = document.getElementById("formMenu:j_idt111") ?: throw ParserException("Invalid document id")
         return label.text()
-    }
-
-    companion object {
-        const val BASE_URL = "https://siga.udesc.br/"
     }
 
 }
