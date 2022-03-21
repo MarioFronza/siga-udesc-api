@@ -22,4 +22,4 @@ RUN rm -rf /var/cache/*
 
 EXPOSE 8080
 
-CMD ["/opt/app/siga-udesc-api/bin/siga-udesc-api"]
+CMD ["/opt/app/siga-udesc-api-1.0.0/bin/siga-udesc-api"]

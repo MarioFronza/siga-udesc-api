@@ -10,9 +10,10 @@ plugins {
 }
 
 group = "com.github"
-version = "0.0.1"
+version = "1.0.0"
+
 application {
-    mainClass.set("com.agis.ApplicationKt")
+    mainClass.set("com.github.sua.ApplicationKt")
 }
 
 repositories {
