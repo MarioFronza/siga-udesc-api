@@ -1,1 +1,1 @@
-web: ./build/install/ktor-gradle-sample/bin/siga-udesc-api
+web: ./build/install/siga-udesc-api/bin/siga-udesc-api
