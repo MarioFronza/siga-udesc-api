@@ -22,6 +22,22 @@ To start the application, execute a Gradle Wrapper *run* task.
 ./gradlew run
 ```
 
+Or using `docker-compose`.
+
+```bash
+docker-compose up
+```
+
+
+## Heroku
+
+Test requesting your semester results using heroku.
+
+```
+curl --request GET \
+--url 'https://siga-udesc-api.herokuapp.com/semester-results?cpf=11111111111&password=pass&year=2022&term=1'
+```
+
 ## Endpoints
 
 ### REST
