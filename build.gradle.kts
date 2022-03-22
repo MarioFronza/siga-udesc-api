@@ -39,3 +39,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     testImplementation("io.mockk:mockk:1.12.3")
 }
+
+tasks.create("stage") {
+    dependsOn("installDist")
+}
