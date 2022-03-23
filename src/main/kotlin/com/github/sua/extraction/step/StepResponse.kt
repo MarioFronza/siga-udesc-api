@@ -17,8 +17,9 @@ sealed class StepResponse {
         fun getEndpoint() = extractorParser.parseEndpoint(payload)
 
         private fun getHeaderByPosition(headers: Map<String, List<String>>, position: Int): String {
-            val header =
-                headers[COOKIE_HEADER_KEY]?.filterIndexed { index, _ -> index == position } ?: throw Exception("oi")
+            val header = headers[COOKIE_HEADER_KEY]?.filterIndexed { index, _ ->
+                index == position
+            } ?: throw IllegalArgumentException("Invalid response headers, could not found key $COOKIE_HEADER_KEY")
             return header.first().split(";").first()
         }
     }
