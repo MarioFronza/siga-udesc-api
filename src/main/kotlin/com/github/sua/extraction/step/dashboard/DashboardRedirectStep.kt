@@ -16,10 +16,10 @@ class DashboardRedirectStep(
 
         val body = mapOf(
             "javax.faces.partial.ajax" to "true",
-            "javax.faces.source" to "formRedirect:j_idt31",
-            "javax.faces.partial.execute" to "formRedirect:j_idt31",
+            "javax.faces.source" to "formRedirect:j_idt32",
+            "javax.faces.partial.execute" to "formRedirect:j_idt32",
             "javax.faces.partial.render" to "@none",
-            "formRedirect:j_idt31" to "formRedirect:j_idt31",
+            "formRedirect:j_idt32" to "formRedirect:j_idt32",
             "formRedirect" to "formRedirect",
             "javax.faces.ViewState" to request.viewState,
         )
