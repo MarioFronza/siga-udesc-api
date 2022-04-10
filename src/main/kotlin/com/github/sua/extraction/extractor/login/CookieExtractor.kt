@@ -2,7 +2,7 @@ package com.github.sua.extraction.extractor.login
 
 import com.github.sua.extraction.exception.ExtractorException
 import com.github.sua.extraction.parser.cookie.CookieParser
-import com.github.sua.extraction.step.StepResponse
+import com.github.sua.extraction.step.StepResponse.StepSuccess
 import com.github.sua.extraction.step.login.CookieStep
 
 class CookieExtractor(
@@ -12,7 +12,7 @@ class CookieExtractor(
 
     fun extract(): CookieExtractorResponse {
         return when (val response = cookieStep.doRequest()) {
-            is StepResponse.StepSuccess -> CookieExtractorResponse(
+            is StepSuccess -> CookieExtractorResponse(
                 endpoint = cookieParser.extractActionUrl(response.payload),
                 viewState = response.getViewState(),
                 sessionId = response.getSessionId()
