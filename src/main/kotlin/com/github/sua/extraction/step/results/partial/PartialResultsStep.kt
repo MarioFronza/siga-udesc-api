@@ -1,15 +1,15 @@
-package com.github.sua.extraction.step.semesterresults
+package com.github.sua.extraction.step.results.partial
 
-import com.github.sua.extraction.extractor.semesterresults.DashboardSemesterResultsExtractorRequest
+import com.github.sua.extraction.extractor.results.partial.PartialResultsExtractorRequest
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
 import com.github.sua.extraction.step.StepResponse
 
-class DashboardSemesterResultsStep(
+class PartialResultsStep(
     private val httpClient: ConnectorHttpClient
 ) : Step() {
 
-    fun doRequest(request: DashboardSemesterResultsExtractorRequest): StepResponse {
+    fun doRequest(request: PartialResultsExtractorRequest): StepResponse{
         val headers = mapOf(
             "Cookie" to "${request.sessionId}; ECS=S; ${request.etts}"
         )

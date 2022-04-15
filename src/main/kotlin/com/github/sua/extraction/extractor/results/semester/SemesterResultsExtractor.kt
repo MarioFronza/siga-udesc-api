@@ -1,9 +1,9 @@
-package com.github.sua.extraction.extractor.semesterresults
+package com.github.sua.extraction.extractor.results.semester
 
 import com.github.sua.extraction.exception.ExtractorException
 import com.github.sua.extraction.parser.semesterresults.SemesterResultsParser
 import com.github.sua.extraction.step.StepResponse.StepSuccess
-import com.github.sua.extraction.step.semesterresults.SemesterResultsStep
+import com.github.sua.extraction.step.results.semester.SemesterResultsStep
 
 class SemesterResultsExtractor(
     private val semesterResultStep: SemesterResultsStep,

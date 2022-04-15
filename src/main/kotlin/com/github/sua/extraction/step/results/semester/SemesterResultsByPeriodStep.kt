@@ -1,6 +1,6 @@
-package com.github.sua.extraction.step.semesterresults
+package com.github.sua.extraction.step.results.semester
 
-import com.github.sua.extraction.extractor.semesterresults.SemesterResultsByPeriodExtractorRequest
+import com.github.sua.extraction.extractor.results.semester.SemesterResultsByPeriodExtractorRequest
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
 import com.github.sua.extraction.step.StepResponse

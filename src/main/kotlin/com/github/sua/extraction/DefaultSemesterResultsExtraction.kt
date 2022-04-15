@@ -5,8 +5,9 @@ import com.github.sua.extraction.extractor.dashboard.DashboardExtractorRequest
 import com.github.sua.extraction.extractor.dashboard.DashboardRedirectExtractor
 import com.github.sua.extraction.extractor.dashboard.DashboardRedirectExtractorRequest
 import com.github.sua.extraction.extractor.login.*
-import com.github.sua.extraction.extractor.semesterresults.*
-import com.github.sua.extraction.extractor.semesterresults.dto.StudentSemesterResults
+import com.github.sua.extraction.extractor.results.semester.*
+import com.github.sua.extraction.extractor.results.*
+import com.github.sua.extraction.extractor.results.semester.dto.StudentSemesterResults
 import com.github.sua.usecase.dto.input.SemesterResultsInput
 import com.github.sua.usecase.extraction.SemesterResultsExtraction
 

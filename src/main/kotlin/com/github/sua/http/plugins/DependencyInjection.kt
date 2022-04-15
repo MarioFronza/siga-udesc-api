@@ -6,9 +6,9 @@ import com.github.sua.extraction.extractor.dashboard.DashboardRedirectExtractor
 import com.github.sua.extraction.extractor.login.CookieExtractor
 import com.github.sua.extraction.extractor.login.LoginExtractor
 import com.github.sua.extraction.extractor.login.LoginRedirectExtractor
-import com.github.sua.extraction.extractor.semesterresults.DashboardSemesterResultsExtractor
-import com.github.sua.extraction.extractor.semesterresults.SemesterResultsByPeriodExtractor
-import com.github.sua.extraction.extractor.semesterresults.SemesterResultsExtractor
+import com.github.sua.extraction.extractor.results.semester.DashboardSemesterResultsExtractor
+import com.github.sua.extraction.extractor.results.semester.SemesterResultsByPeriodExtractor
+import com.github.sua.extraction.extractor.results.semester.SemesterResultsExtractor
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.misc.httpclient.ktor.KtorHttpClient
 import com.github.sua.extraction.parser.cookie.CookieParser
@@ -19,9 +19,9 @@ import com.github.sua.extraction.step.dashboard.DashboardStep
 import com.github.sua.extraction.step.login.CookieStep
 import com.github.sua.extraction.step.login.LoginRedirectStep
 import com.github.sua.extraction.step.login.LoginStep
-import com.github.sua.extraction.step.semesterresults.DashboardSemesterResultsStep
-import com.github.sua.extraction.step.semesterresults.SemesterResultsByPeriodStep
-import com.github.sua.extraction.step.semesterresults.SemesterResultsStep
+import com.github.sua.extraction.step.results.semester.DashboardSemesterResultsStep
+import com.github.sua.extraction.step.results.semester.SemesterResultsByPeriodStep
+import com.github.sua.extraction.step.results.semester.SemesterResultsStep
 import com.github.sua.usecase.extraction.SemesterResultsExtraction
 import com.github.sua.usecase.retrieve.RetrieveSemesterResults
 import com.github.sua.usecase.retrieve.RetrieveStudentInfo

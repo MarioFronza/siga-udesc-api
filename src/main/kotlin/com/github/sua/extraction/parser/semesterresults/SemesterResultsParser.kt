@@ -1,7 +1,7 @@
 package com.github.sua.extraction.parser.semesterresults
 
-import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResult
-import com.github.sua.extraction.extractor.semesterresults.dto.SemesterResultsResponse
+import com.github.sua.extraction.extractor.results.semester.dto.SemesterResult
+import com.github.sua.extraction.extractor.results.semester.dto.SemesterResultsResponse
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
