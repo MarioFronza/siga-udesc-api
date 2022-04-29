@@ -14,7 +14,9 @@ class PartialResultsExtractor(
         return when (val response = partialResultsStep.doRequest(request)) {
             is StepSuccess -> PartialResultsExtractorResponse(
                 sessionId = response.getSessionId(position = 0),
-                periodsIdentified = partialResultsParser.extractPeriodsIdentified(response.payload)
+                periodsIdentified = partialResultsParser.extractPeriodsIdentified(response.payload),
+                coursesIdentified = partialResultsParser.extractCourses(response.payload),
+                subjectsIdentified = partialResultsParser.extractSubjects(response.payload)
             )
             else -> throw ExtractorException("Partial results extractor unexpected error")
         }
@@ -31,4 +33,6 @@ data class PartialResultsExtractorRequest(
 data class PartialResultsExtractorResponse(
     val sessionId: String,
     val periodsIdentified: Map<String, String>,
+    val coursesIdentified: Map<String, String>,
+    val subjectsIdentified: Map<String, String>,
 )

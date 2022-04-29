@@ -40,7 +40,9 @@ class PartialResultsExtractorTest {
 
         val expected = PartialResultsExtractorResponse(
             sessionId = sessionId,
-            periodsIdentified = emptyMap()
+            periodsIdentified = emptyMap(),
+            coursesIdentified = partialResultsParser.extractCourses(response.payload),
+            subjectsIdentified = partialResultsParser.extractSubjects(response.payload)
         )
         val actual = partialResultsExtractor.extract(request)
 
