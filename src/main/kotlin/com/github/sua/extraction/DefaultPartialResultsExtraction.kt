@@ -9,6 +9,7 @@ import com.github.sua.extraction.extractor.results.semester.*
 import com.github.sua.extraction.extractor.results.*
 import com.github.sua.extraction.extractor.results.partial.*
 import com.github.sua.extraction.extractor.results.partial.dto.StudentPartialResults
+import com.github.sua.extraction.parser.dashboard.DashboardParser.Companion.PARTIAL_RESULT_PAGE
 import com.github.sua.usecase.dto.input.PartialResultsInput
 import com.github.sua.usecase.extraction.PartialResultsExtraction
 
@@ -53,7 +54,8 @@ class DefaultPartialResultsExtraction(
                 endpoint = dashboardRedirectResponse.endpoint,
                 sessionId = cookieExtractorResponse.sessionId,
                 etts = loginRedirectExtractorResponse.etts,
-            )
+            ),
+         pageType = PARTIAL_RESULT_PAGE
         )
 
         val dashboardPartialResultsExtractorResponse = dashboardPartialResultsExtractor.extract(
@@ -84,7 +86,7 @@ class DefaultPartialResultsExtraction(
         ) ?: throw Exception("Invalid course identified")
 
         val subjectIdentified = getSigaIdentifiedBy(
-            content = input.course,
+            content = input.subject,
             items = partialResultsResponse.subjectsIdentified
         ) ?: throw Exception("Invalid subject identified")
 

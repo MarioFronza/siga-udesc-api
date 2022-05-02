@@ -11,9 +11,9 @@ class DashboardPartialResultsExtractor(
 ) {
 
     fun extract(request: DashboardPartialResultsExtractorRequest): DashboardPartialResultsExtractorResponse {
-        return when (val response =dashboardPartialResultsStep.doRequest(request)){
+        return when (val response = dashboardPartialResultsStep.doRequest(request)){
             is StepSuccess -> DashboardPartialResultsExtractorResponse(
-                endpoint =partialResultsParser.extractSemesterResultsUrl(response.payload)
+                endpoint = partialResultsParser.extractPartialResultsUrl(response.payload)
             )
             else -> throw ExtractorException("Partial results extractor unexpected error")
         }

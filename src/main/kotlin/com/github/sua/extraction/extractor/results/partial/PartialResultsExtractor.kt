@@ -16,7 +16,7 @@ class PartialResultsExtractor(
                 sessionId = response.getSessionId(position = 0),
                 periodsIdentified = partialResultsParser.extractPeriodsIdentified(response.payload),
                 coursesIdentified = partialResultsParser.extractCourses(response.payload),
-                subjectsIdentified = partialResultsParser.extractSubjects(response.payload)
+                subjectsIdentified =  partialResultsParser.extractSubjects(response.payload)
             )
             else -> throw ExtractorException("Partial results extractor unexpected error")
         }

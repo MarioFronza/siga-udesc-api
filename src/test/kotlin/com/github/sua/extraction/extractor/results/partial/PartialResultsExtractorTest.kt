@@ -35,7 +35,7 @@ class PartialResultsExtractorTest {
             payload = payload,
             headers = emptyMap()
         )
-        every { partialResultsParser.extractSemesterResultsUrl(payload) } returns sessionId
+        every { partialResultsParser.extractPartialResultsUrl(payload) } returns sessionId
         every { partialResultsParser.extractPeriodsIdentified(payload) } returns emptyMap()
 
         val expected = PartialResultsExtractorResponse(
@@ -78,7 +78,7 @@ class PartialResultsExtractorTest {
             payload = payload,
             headers = emptyMap()
         )
-        every { partialResultsParser.extractSemesterResultsUrl(payload) } throws ParserException("parse exception")
+        every { partialResultsParser.extractPartialResultsUrl(payload) } throws ParserException("parse exception")
 
         Assert.assertThrows(ParserException::class.java) {
             partialResultsExtractor.extract(request)

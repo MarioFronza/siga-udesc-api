@@ -37,7 +37,7 @@ class DashboardPartialResultsExtractorTest {
             payload = payload,
             headers = emptyMap()
         )
-        every { partialResultsParser.extractSemesterResultsUrl(payload) } returns semesterResultsUrl
+        every { partialResultsParser.extractPartialResultsUrl(payload) } returns semesterResultsUrl
 
         val expected = DashboardPartialResultsExtractorResponse(
             endpoint = semesterResultsUrl,
@@ -76,7 +76,7 @@ class DashboardPartialResultsExtractorTest {
             payload = payload,
             headers = emptyMap()
         )
-        every { partialResultsParser.extractSemesterResultsUrl(payload) } throws ParserException("parse exception")
+        every { partialResultsParser.extractPartialResultsUrl(payload) } throws ParserException("parse exception")
 
         assertThrows(ParserException::class.java) {
             dashboardPartialResultsExtractor.extract(request)

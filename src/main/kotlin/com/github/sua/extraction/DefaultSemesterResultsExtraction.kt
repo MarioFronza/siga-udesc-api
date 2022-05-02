@@ -8,6 +8,7 @@ import com.github.sua.extraction.extractor.login.*
 import com.github.sua.extraction.extractor.results.semester.*
 import com.github.sua.extraction.extractor.results.*
 import com.github.sua.extraction.extractor.results.semester.dto.StudentSemesterResults
+import com.github.sua.extraction.parser.dashboard.DashboardParser.Companion.SEMESTER_RESULT_PAGE
 import com.github.sua.usecase.dto.input.SemesterResultsInput
 import com.github.sua.usecase.extraction.SemesterResultsExtraction
 
@@ -52,7 +53,8 @@ class DefaultSemesterResultsExtraction(
                 endpoint = dashboardRedirectResponse.endpoint,
                 sessionId = cookieExtractorResponse.sessionId,
                 etts = loginRedirectExtractorResponse.etts,
-            )
+            ),
+           pageType =  SEMESTER_RESULT_PAGE
         )
 
         val dashboardSemesterResultsExtractorResponse = dashboardSemesterResultsExtractor.extract(

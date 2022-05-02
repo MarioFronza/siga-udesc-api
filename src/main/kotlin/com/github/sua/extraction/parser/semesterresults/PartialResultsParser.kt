@@ -17,14 +17,13 @@ class PartialResultsParser {
         val document = Jsoup.parse(responseContent)
         val termSelect = document.getElementById("lPeriodoLetivo")!!
         val courseSelect = document.getElementById("lCurso")!!
-        val subjectSelect = document.getElementById("lDisciplina")!!
         val resultSpan = document.getElementById("resultado")!!
 
         return PartialResults(
             course = extractCourse(courseSelect, courseIdentified),
             period = extractPeriod(termSelect, periodIdentified),
-            subjectName = extractSubject(subjectSelect, subjectIdentified),
-            partialResults = extractPartialResultsBy(resultSpan),
+            subjectName = "todo",
+            results = extractPartialResultsBy(resultSpan),
         )
     }
 
@@ -70,7 +69,7 @@ class PartialResultsParser {
         )
     }
 
-    fun extractSemesterResultsUrl(responseContent: String): String {
+    fun extractPartialResultsUrl(responseContent: String): String {
         val document = Jsoup.parse(responseContent)
         val input = document.getElementById("formPrincipal:linkAbre")
         return input?.attr("value")?.substringAfter("/") ?: throw ParserException("Invalid document key")
@@ -104,5 +103,6 @@ class PartialResultsParser {
             it.text() to it.attr("value")
         }?.toMap() ?: throw Exception("Invalid element id")
     }
+
 
 }

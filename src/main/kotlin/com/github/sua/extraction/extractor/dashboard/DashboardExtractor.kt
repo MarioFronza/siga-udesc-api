@@ -10,11 +10,11 @@ class DashboardExtractor(
     private val dashboardParser: DashboardParser
 ) {
 
-    fun extract(request: DashboardExtractorRequest): DashboardExtractorResponse {
+    fun extract(request: DashboardExtractorRequest, pageType: String): DashboardExtractorResponse {
         return when (val response = dashboardStep.doRequest(request)) {
             is StepSuccess -> DashboardExtractorResponse(
                 studentName = dashboardParser.extractStudentName(response.payload),
-                endpoint = dashboardParser.extractDashboardSemesterResultsUrl(response.payload)
+                endpoint = dashboardParser.extractDashboardActionPageUrl(response.payload, pageType)
             )
             else -> throw ExtractorException("Dashboard extractor unexpected error")
         }
@@ -32,3 +32,4 @@ data class DashboardExtractorResponse(
     val studentName: String,
     val endpoint: String
 )
+

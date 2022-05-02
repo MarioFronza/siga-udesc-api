@@ -1,8 +1,10 @@
 package com.github.sua.http.plugins
 
 import com.github.sua.http.controller.healthCheck
+import com.github.sua.http.controller.partialResults
 import com.github.sua.http.controller.semesterResults
 import com.github.sua.http.controller.studentInfo
+import com.github.sua.usecase.retrieve.RetrievePartialResults
 import com.github.sua.usecase.retrieve.RetrieveSemesterResults
 import com.github.sua.usecase.retrieve.RetrieveStudentInfo
 import io.ktor.application.*
@@ -18,10 +20,12 @@ fun Application.configureRouting() {
 
     val retrieveStudentInfo by inject<RetrieveStudentInfo>()
     val retrieveSemesterResults by inject<RetrieveSemesterResults>()
+    val retrievePartialResults by inject<RetrievePartialResults>()
 
     routing {
         healthCheck()
         studentInfo(retrieveStudentInfo)
         semesterResults(retrieveSemesterResults)
+        partialResults(retrievePartialResults)
     }
 }

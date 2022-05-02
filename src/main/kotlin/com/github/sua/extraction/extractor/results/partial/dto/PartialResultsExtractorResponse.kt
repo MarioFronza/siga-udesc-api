@@ -13,7 +13,7 @@ data class PartialResults(
     val period: String,
     val course: String,
     val subjectName: String,
-    val partialResults: List<PartialResult>
+    val results: List<PartialResult>
 )
 
 @Serializable
