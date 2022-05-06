@@ -5,9 +5,9 @@ import org.jsoup.Jsoup
 
 class DashboardParser {
 
-    fun extractDashboardActionPageUrl(responseContent: String, pageType:String): String {
+    fun extractDashboardActionPageUrl(responseContent: String, resultPageType:String): String {
         val document = Jsoup.parse(responseContent)
-        val elementId = getElementIdByPageType(pageType)
+        val elementId = getElementIdByPageType(resultPageType)
         val li = document.getElementById(elementId) ?: throw ParserException("Invalid document id")
         val a = li.children()
         return a.attr("href").substringAfter("/")

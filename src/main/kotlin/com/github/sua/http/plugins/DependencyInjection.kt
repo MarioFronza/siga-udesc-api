@@ -1,5 +1,6 @@
 package com.github.sua.http.plugins
 
+import com.github.sua.extraction.DashboardExtraction
 import com.github.sua.extraction.DefaultPartialResultsExtraction
 import com.github.sua.extraction.DefaultSemesterResultsExtraction
 import com.github.sua.extraction.extractor.dashboard.DashboardExtractor
@@ -78,11 +79,12 @@ val appModule = module(createdAtStart = true) {
     single { DashboardPartialResultsExtractor(get(), get()) }
     single { SemesterResultsByPeriodExtractor(get(), get()) }
     single { PartialResultsByPeriodExtractor(get(), get()) }
+    single { DashboardExtraction(get(), get(), get(), get(), get()) }
     single<SemesterResultsExtraction> {
-        DefaultSemesterResultsExtraction(get(), get(), get(), get(), get(), get(), get(), get())
+        DefaultSemesterResultsExtraction(get(), get(), get(), get())
     }
     single<PartialResultsExtraction> {
-        DefaultPartialResultsExtraction(get(), get(), get(), get(), get(), get(), get(), get())
+        DefaultPartialResultsExtraction(get(), get(), get(), get())
     }
     single { RetrieveSemesterResults(get()) }
     single { RetrievePartialResults(get()) }

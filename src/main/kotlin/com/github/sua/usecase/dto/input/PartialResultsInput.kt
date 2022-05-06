@@ -7,4 +7,8 @@ data class PartialResultsInput(
     val period: PeriodInput,
     val course: String,
     val subject: String,
-)
+){
+    fun toDashboardInput() = DashboardExtractionInput(
+        sigaCredential = sigaCredential
+    )
+}

@@ -14,7 +14,7 @@ class SemesterResultsExtractor(
         return when (val response = semesterResultStep.doRequest(request)) {
             is StepSuccess -> SemesterResultsExtractorResponse(
                 sessionId = response.getSessionId(position = 0),
-                periodIdentified = semesterResultsParser.extractPeriods(response.payload)
+                periodsIdentified = semesterResultsParser.extractPeriods(response.payload)
             )
             else -> throw ExtractorException("Semester results extractor unexpected error")
         }
@@ -30,5 +30,5 @@ data class SemesterResultsExtractorRequest(
 
 data class SemesterResultsExtractorResponse(
     val sessionId: String,
-    val periodIdentified: Map<String, String>,
+    val periodsIdentified: Map<String, String>,
 )
