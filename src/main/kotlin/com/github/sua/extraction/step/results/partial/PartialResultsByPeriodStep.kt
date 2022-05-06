@@ -1,15 +1,15 @@
-package com.github.sua.extraction.step.semesterresults
+package com.github.sua.extraction.step.results.partial
 
-import com.github.sua.extraction.extractor.semesterresults.SemesterResultsByPeriodExtractorRequest
+import com.github.sua.extraction.extractor.results.partial.PartialResultsByPeriodExtractorRequest
 import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.step.Step
 import com.github.sua.extraction.step.StepResponse
 
-class SemesterResultsByPeriodStep(
+class PartialResultsByPeriodStep(
     private val httpClient: ConnectorHttpClient
 ) : Step() {
 
-    fun doRequest(request: SemesterResultsByPeriodExtractorRequest): StepResponse {
+    fun doRequest(request: PartialResultsByPeriodExtractorRequest): StepResponse {
         val headers = mapOf(
             "Cookie" to "${request.sessionId}; ECS=S; ${request.etts}"
         )
@@ -22,10 +22,10 @@ class SemesterResultsByPeriodStep(
             "indExcDetPlc" to "",
             "evento" to "Executar Consulta",
             "lPeriodoLetivo" to request.periodIdentified,
-            "lCurso" to "",
-            "estadoJanelaimportacao" to "fecha",
+            "lCurso" to request.courseIdentified,
+            "lDisciplina" to request.subjectIdentified,
             "caracterSep" to "",
-            "idConsulta" to "2",
+            "idConsulta" to "3",
             "exibecomp" to "N",
             "exibeComboPerLet" to "S",
             "nomeArquivoPdf" to ""

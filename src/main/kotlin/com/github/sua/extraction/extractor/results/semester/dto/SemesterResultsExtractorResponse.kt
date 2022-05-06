@@ -1,4 +1,4 @@
-package com.github.sua.extraction.extractor.semesterresults.dto
+package com.github.sua.extraction.extractor.results.semester.dto
 
 import kotlinx.serialization.*
 

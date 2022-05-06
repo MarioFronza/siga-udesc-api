@@ -29,7 +29,6 @@ class CookieExtractorTest {
 
     }
 
-
     @Test
     fun `should throw ExtractorException when cookie step fails`() {
         val payload = "error"
