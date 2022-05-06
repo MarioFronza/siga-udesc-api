@@ -17,12 +17,13 @@ class PartialResultsParser {
         val document = Jsoup.parse(responseContent)
         val termSelect = document.getElementById("lPeriodoLetivo")!!
         val courseSelect = document.getElementById("lCurso")!!
+        val subjectSelect = document.getElementById("lDisciplina")!!
         val resultSpan = document.getElementById("resultado")!!
 
         return PartialResults(
             course = extractCourse(courseSelect, courseIdentified),
             period = extractPeriod(termSelect, periodIdentified),
-            subjectName = "todo",
+            subjectName = extractSubject(subjectSelect, subjectIdentified),
             results = extractPartialResultsBy(resultSpan),
         )
     }
