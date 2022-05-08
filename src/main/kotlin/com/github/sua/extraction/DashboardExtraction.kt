@@ -5,7 +5,7 @@ import com.github.sua.extraction.extractor.dashboard.DashboardExtractorRequest
 import com.github.sua.extraction.extractor.dashboard.DashboardRedirectExtractor
 import com.github.sua.extraction.extractor.dashboard.DashboardRedirectExtractorRequest
 import com.github.sua.extraction.extractor.login.*
-import com.github.sua.usecase.dto.input.DashboardExtractionInput
+import com.github.sua.usecase.dto.input.extraction.DashboardInput
 
 class DashboardExtraction(
     private val cookieExtractor: CookieExtractor,
@@ -15,7 +15,7 @@ class DashboardExtraction(
     private val dashboardExtractor: DashboardExtractor,
 ) {
 
-    fun extract(input: DashboardExtractionInput, resultPageType: String): DashboardExtractionResponse {
+    fun extract(input: DashboardInput, resultPageType: String): DashboardExtractionResponse {
         val cookieExtractorResponse = cookieExtractor.extract()
 
         val loginExtractorResponse = loginExtractor.extract(

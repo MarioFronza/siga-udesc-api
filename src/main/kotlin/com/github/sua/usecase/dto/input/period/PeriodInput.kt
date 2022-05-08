@@ -1,4 +1,4 @@
-package com.github.sua.usecase.dto.input
+package com.github.sua.usecase.dto.input.period
 
 data class PeriodInput(
     val year: String,

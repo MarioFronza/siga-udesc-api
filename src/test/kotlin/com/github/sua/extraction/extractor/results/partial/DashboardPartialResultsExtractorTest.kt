@@ -4,7 +4,7 @@ import com.github.sua.extraction.exception.ExtractorException
 import com.github.sua.extraction.exception.ParserException
 import com.github.sua.extraction.step.StepResponse.StepError
 import com.github.sua.extraction.step.StepResponse.StepSuccess
-import com.github.sua.extraction.parser.semesterresults.PartialResultsParser
+import com.github.sua.extraction.parser.results.PartialResultsParser
 import com.github.sua.extraction.step.results.partial.DashboardPartialResultsStep
 import org.junit.Assert.assertThrows
 import io.mockk.every

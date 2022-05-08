@@ -1,8 +1,8 @@
-package com.github.sua.extraction.parser.semesterresults
+package com.github.sua.extraction.parser.results
 
 import com.github.sua.extraction.exception.ParserException
-import com.github.sua.extraction.extractor.results.partial.dto.PartialResult
-import com.github.sua.extraction.extractor.results.partial.dto.PartialResults
+import com.github.sua.usecase.dto.output.extraction.PartialResult
+import com.github.sua.usecase.dto.output.extraction.PartialResults
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 

@@ -1,9 +1,9 @@
-package com.github.sua.extraction.extractor.results.partial.dto
+package com.github.sua.usecase.dto.output.extraction
 
 import kotlinx.serialization.*
 
 @Serializable
-data class StudentPartialResults(
+data class StudentPartialOutput(
     val studentName: String,
     val partialResults: PartialResults
 )

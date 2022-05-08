@@ -2,7 +2,7 @@ package com.github.sua.extraction.extractor.results.partial
 
 import com.github.sua.extraction.exception.ExtractorException
 import com.github.sua.extraction.exception.ParserException
-import com.github.sua.extraction.parser.semesterresults.PartialResultsParser
+import com.github.sua.extraction.parser.results.PartialResultsParser
 import com.github.sua.extraction.step.StepResponse
 import com.github.sua.extraction.step.results.partial.PartialResultsStep
 import io.mockk.every

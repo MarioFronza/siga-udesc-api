@@ -1,4 +1,4 @@
-package com.github.sua.usecase.dto.input
+package com.github.sua.usecase.dto.input.credential
 
 data class SigaCredentialInput(
     val cpf: String,

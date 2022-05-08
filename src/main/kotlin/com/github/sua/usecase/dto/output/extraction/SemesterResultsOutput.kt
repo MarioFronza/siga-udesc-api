@@ -1,9 +1,9 @@
-package com.github.sua.extraction.extractor.results.semester.dto
+package com.github.sua.usecase.dto.output.extraction
 
 import kotlinx.serialization.*
 
 @Serializable
-data class StudentSemesterResults(
+data class StudentSemesterOutput(
     val studentName: String,
     val semesterResults: SemesterResultsResponse
 )
