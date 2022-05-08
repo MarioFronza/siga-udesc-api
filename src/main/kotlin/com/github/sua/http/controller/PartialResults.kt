@@ -1,9 +1,9 @@
 package com.github.sua.http.controller
 
-import com.github.sua.entity.student.SigaCredential
 import com.github.sua.http.extension.getRequiredParameter
-import com.github.sua.usecase.dto.input.PartialResultsInput
-import com.github.sua.usecase.dto.input.PeriodInput
+import com.github.sua.usecase.dto.input.credential.SigaCredentialInput
+import com.github.sua.usecase.dto.input.extraction.PartialResultsInput
+import com.github.sua.usecase.dto.input.period.PeriodInput
 import com.github.sua.usecase.retrieve.RetrievePartialResults
 import io.ktor.application.*
 import io.ktor.locations.*
@@ -17,7 +17,7 @@ fun Route.partialResults(
     service: RetrievePartialResults
 ) = get<PartialResults> {
     val input = PartialResultsInput(
-        sigaCredential = SigaCredential(
+        sigaCredential = SigaCredentialInput(
             cpf = call.getRequiredParameter("cpf"),
             password = call.getRequiredParameter("password")
         ),

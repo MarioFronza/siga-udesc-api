@@ -1,10 +1,10 @@
 package com.github.sua.extraction
 
 import com.github.sua.extraction.extractor.results.partial.*
-import com.github.sua.extraction.extractor.results.partial.dto.StudentPartialResults
+import com.github.sua.usecase.dto.output.extraction.StudentPartialOutput
 import com.github.sua.extraction.misc.utils.getIdentifiedBy
 import com.github.sua.extraction.parser.dashboard.DashboardParser.Companion.PARTIAL_RESULT_PAGE
-import com.github.sua.usecase.dto.input.PartialResultsInput
+import com.github.sua.usecase.dto.input.extraction.PartialResultsInput
 import com.github.sua.usecase.extraction.PartialResultsExtraction
 
 class DefaultPartialResultsExtraction(
@@ -14,7 +14,7 @@ class DefaultPartialResultsExtraction(
     private val partialResultsByPeriodExtractor: PartialResultsByPeriodExtractor
 ) : PartialResultsExtraction {
 
-    override fun extract(input: PartialResultsInput): StudentPartialResults {
+    override fun extract(input: PartialResultsInput): StudentPartialOutput {
         val dashboardExtractionResponse = dashboardExtraction.extract(
             input = input.toDashboardInput(),
             resultPageType = PARTIAL_RESULT_PAGE
@@ -52,7 +52,7 @@ class DefaultPartialResultsExtraction(
             )
         )
 
-        return StudentPartialResults(
+        return StudentPartialOutput(
             studentName = dashboardExtractionResponse.studentName,
             partialResults = partialResultsByPeriodExtractorResponse.partialResults
         )

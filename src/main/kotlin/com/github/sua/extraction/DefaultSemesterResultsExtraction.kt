@@ -1,10 +1,10 @@
 package com.github.sua.extraction
 
 import com.github.sua.extraction.extractor.results.semester.*
-import com.github.sua.extraction.extractor.results.semester.dto.StudentSemesterResults
+import com.github.sua.usecase.dto.output.extraction.StudentSemesterOutput
 import com.github.sua.extraction.misc.utils.getIdentifiedBy
 import com.github.sua.extraction.parser.dashboard.DashboardParser.Companion.SEMESTER_RESULT_PAGE
-import com.github.sua.usecase.dto.input.SemesterResultsInput
+import com.github.sua.usecase.dto.input.extraction.SemesterResultsInput
 import com.github.sua.usecase.extraction.SemesterResultsExtraction
 
 class DefaultSemesterResultsExtraction(
@@ -14,7 +14,7 @@ class DefaultSemesterResultsExtraction(
     private val semesterResultsByPeriodExtractor: SemesterResultsByPeriodExtractor
 ) : SemesterResultsExtraction {
 
-    override fun extract(input: SemesterResultsInput): StudentSemesterResults {
+    override fun extract(input: SemesterResultsInput): StudentSemesterOutput {
         val dashboardExtractionResponse = dashboardExtraction.extract(
             input = input.toDashboardInput(),
             resultPageType = SEMESTER_RESULT_PAGE
@@ -48,7 +48,7 @@ class DefaultSemesterResultsExtraction(
             )
         )
 
-        return StudentSemesterResults(
+        return StudentSemesterOutput(
             studentName = dashboardExtractionResponse.studentName,
             semesterResults = semesterResultsByPeriodExtractorResponse.semesterResults.toSemesterResultsPeriod()
         )

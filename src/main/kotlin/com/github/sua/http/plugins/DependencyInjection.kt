@@ -18,8 +18,8 @@ import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
 import com.github.sua.extraction.misc.httpclient.ktor.KtorHttpClient
 import com.github.sua.extraction.parser.cookie.CookieParser
 import com.github.sua.extraction.parser.dashboard.DashboardParser
-import com.github.sua.extraction.parser.semesterresults.PartialResultsParser
-import com.github.sua.extraction.parser.semesterresults.SemesterResultsParser
+import com.github.sua.extraction.parser.results.PartialResultsParser
+import com.github.sua.extraction.parser.results.SemesterResultsParser
 import com.github.sua.extraction.step.dashboard.DashboardRedirectStep
 import com.github.sua.extraction.step.dashboard.DashboardStep
 import com.github.sua.extraction.step.login.CookieStep

@@ -1,12 +1,10 @@
 package com.github.sua.extraction.extractor.results.partial
 
 import com.github.sua.extraction.exception.ExtractorException
-import com.github.sua.extraction.extractor.results.partial.dto.PartialResults
-import com.github.sua.extraction.parser.semesterresults.PartialResultsParser
-import com.github.sua.extraction.parser.semesterresults.SemesterResultsParser
+import com.github.sua.usecase.dto.output.extraction.PartialResults
+import com.github.sua.extraction.parser.results.PartialResultsParser
 import com.github.sua.extraction.step.StepResponse.StepSuccess
 import com.github.sua.extraction.step.results.partial.PartialResultsByPeriodStep
-import com.github.sua.extraction.step.results.semester.SemesterResultsByPeriodStep
 
 class PartialResultsByPeriodExtractor(
     private val partialResultsByPeriodStep: PartialResultsByPeriodStep,
