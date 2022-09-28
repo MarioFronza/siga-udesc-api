@@ -7,14 +7,13 @@ import com.github.sua.http.controller.studentInfo
 import com.github.sua.usecase.retrieve.RetrievePartialResults
 import com.github.sua.usecase.retrieve.RetrieveSemesterResults
 import com.github.sua.usecase.retrieve.RetrieveStudentInfo
-import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.locations.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.locations.*
+import io.ktor.server.plugins.callloging.*
+import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
-    install(DefaultHeaders)
     install(Locations)
     install(CallLogging)
 

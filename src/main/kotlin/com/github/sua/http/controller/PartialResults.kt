@@ -5,10 +5,10 @@ import com.github.sua.usecase.dto.input.credential.SigaCredentialInput
 import com.github.sua.usecase.dto.input.extraction.PartialResultsInput
 import com.github.sua.usecase.dto.input.period.PeriodInput
 import com.github.sua.usecase.retrieve.RetrievePartialResults
-import io.ktor.application.*
-import io.ktor.locations.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.locations.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 
 @Location("/partial-results")
 class PartialResults

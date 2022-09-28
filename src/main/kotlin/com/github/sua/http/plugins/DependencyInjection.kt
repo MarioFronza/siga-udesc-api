@@ -36,10 +36,10 @@ import com.github.sua.usecase.extraction.SemesterResultsExtraction
 import com.github.sua.usecase.retrieve.RetrievePartialResults
 import com.github.sua.usecase.retrieve.RetrieveSemesterResults
 import com.github.sua.usecase.retrieve.RetrieveStudentInfo
-import io.ktor.application.*
+import io.ktor.server.application.*
 import org.koin.dsl.module
 import org.koin.dsl.single
-import org.koin.ktor.ext.Koin
+import org.koin.ktor.plugin.Koin
 
 fun Application.configureDI() {
     install(Koin) {
