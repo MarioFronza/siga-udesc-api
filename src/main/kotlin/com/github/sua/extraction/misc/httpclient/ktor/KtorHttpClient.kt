@@ -23,12 +23,16 @@ class KtorHttpClient : ConnectorHttpClient {
                     }
                 }
             }
-            val responseString = httpResponse.receive<String>()
+            val responseString = httpResponse.body<String>()
             httpResponse.toCustomHttpResponse(body = responseString)
         }
     }
 
-    override fun post(endpoint: String, headers: Map<String, String>, body: Map<String, String>): ConnectorHttpResponse {
+    override fun post(
+        endpoint: String,
+        headers: Map<String, String>,
+        body: Map<String, String>
+    ): ConnectorHttpResponse {
         return runBlocking {
             val httpResponse: HttpResponse = client.post(SIGA_BASE_URL + endpoint) {
                 headers {
@@ -36,13 +40,13 @@ class KtorHttpClient : ConnectorHttpClient {
                         header(it.key, it.value)
                     }
                 }
-                this.body = FormDataContent(Parameters.build {
+                setBody(FormDataContent(Parameters.build {
                     body.entries.forEach {
                         append(it.key, it.value)
                     }
-                })
+                }))
             }
-            val responseString = httpResponse.receive<String>()
+            val responseString = httpResponse.body<String>()
             httpResponse.toCustomHttpResponse(body = responseString)
         }
     }
