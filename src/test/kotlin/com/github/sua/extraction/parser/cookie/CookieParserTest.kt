@@ -1,6 +1,7 @@
 package com.github.sua.extraction.parser.cookie
 
-import com.github.sua.extraction.exception.ParserException
+import com.github.sua.integration.exception.ParserException
+import com.github.sua.integration.siga.parser.cookie.CookieParser
 import com.github.sua.utils.TestUtils.getFileContent
 import org.junit.Assert.assertThrows
 import kotlin.test.Test

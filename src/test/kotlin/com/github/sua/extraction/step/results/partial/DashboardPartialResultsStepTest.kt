@@ -1,10 +1,11 @@
 package com.github.sua.extraction.step.results.partial
 
-import com.github.sua.extraction.extractor.results.partial.DashboardPartialResultsExtractorRequest
-import com.github.sua.extraction.step.StepResponse.StepError
-import com.github.sua.extraction.step.StepResponse.StepSuccess
-import com.github.sua.extraction.misc.httpclient.ConnectorHttpClient
-import com.github.sua.extraction.misc.httpclient.ConnectorHttpResponse
+import com.github.sua.integration.siga.extraction.extractor.results.partial.DashboardPartialResultsExtractorRequest
+import com.github.sua.integration.siga.step.StepResponse.StepError
+import com.github.sua.integration.siga.step.StepResponse.StepSuccess
+import com.github.sua.integration.http.ConnectorHttpClient
+import com.github.sua.integration.http.ConnectorHttpResponse
+import com.github.sua.integration.siga.step.results.partial.DashboardPartialResultsStep
 import io.mockk.every
 import io.mockk.mockk
 import java.net.HttpURLConnection

@@ -1,6 +1,6 @@
 package com.github.sua.usecase.retrieve
 
-import com.github.sua.usecase.dto.input.credential.SigaCredentialInput
+import com.github.sua.usecase.integration.dto.credential.SigaCredentialInput
 
 class RetrieveStudentInfo {
 

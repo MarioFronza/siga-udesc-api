@@ -5,14 +5,14 @@ import kotlinx.serialization.*
 @Serializable
 data class StudentSemesterOutput(
     val studentName: String,
-    val semesterResults: SemesterResultsResponse
+    val semesterResults: SemesterResultsResponse,
 )
 
 @Serializable
 data class SemesterResultsResponse(
     val period: String,
+    val course: String,
     val semesterResults: List<SemesterResult>,
-    val course: String
 )
 
 @Serializable

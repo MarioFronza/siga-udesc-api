@@ -13,15 +13,12 @@ plugins {
 }
 
 group = "com.github"
+
 version = "1.0.0"
 
-application {
-    mainClass.set("com.github.sua.ApplicationKt")
-}
+application { mainClass.set("com.github.sua.ApplicationKt") }
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
     implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
@@ -46,8 +43,4 @@ dependencies {
     testImplementation("io.insert-koin:koin-test:$koinVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
-}
-
-tasks.create("stage") {
-    dependsOn("installDist")
 }

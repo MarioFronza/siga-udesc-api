@@ -1,15 +1,15 @@
 package com.github.sua.usecase.retrieve
 
-import com.github.sua.usecase.dto.output.extraction.StudentSemesterOutput
-import com.github.sua.usecase.dto.input.extraction.SemesterResultsInput
-import com.github.sua.usecase.extraction.SemesterResultsExtraction
+import com.github.sua.usecase.integration.SemesterResultsIntegration
+import com.github.sua.usecase.integration.dto.IntegrationOutput
+import com.github.sua.usecase.integration.dto.results.SemesterResultsIntegrationInput
+import com.github.sua.usecase.integration.dto.results.StudentSemesterResultsIntegrationOutput
 
-class RetrieveSemesterResults(
-    private val semesterResultsExtraction: SemesterResultsExtraction
-) {
+class RetrieveSemesterResults(private val semesterResultsIntegration: SemesterResultsIntegration) {
 
-    fun retrieve(input: SemesterResultsInput): StudentSemesterOutput {
-        return semesterResultsExtraction.extract(input)
+    fun retrieve(input: SemesterResultsIntegrationInput): StudentSemesterResultsIntegrationOutput {
+        val result =
+                semesterResultsIntegration.integrate(input) as IntegrationOutput.IntegrationSuccess
+        return result.data
     }
-
 }

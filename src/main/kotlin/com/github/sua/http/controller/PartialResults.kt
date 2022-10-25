@@ -1,9 +1,9 @@
 package com.github.sua.http.controller
 
 import com.github.sua.http.extension.getRequiredParameter
-import com.github.sua.usecase.dto.input.credential.SigaCredentialInput
+import com.github.sua.usecase.integration.dto.credential.SigaCredentialInput
 import com.github.sua.usecase.dto.input.extraction.PartialResultsInput
-import com.github.sua.usecase.dto.input.period.PeriodInput
+import com.github.sua.usecase.integration.dto.period.PeriodInput
 import com.github.sua.usecase.retrieve.RetrievePartialResults
 import io.ktor.server.application.*
 import io.ktor.server.locations.*

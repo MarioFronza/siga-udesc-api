@@ -1,1 +1,0 @@
-web: ./build/install/siga-udesc-api/bin/siga-udesc-api

@@ -1,11 +1,14 @@
 package com.github.sua.extraction.extractor.results.partial
 
-import com.github.sua.extraction.exception.ExtractorException
-import com.github.sua.extraction.exception.ParserException
-import com.github.sua.extraction.step.StepResponse.StepError
-import com.github.sua.extraction.step.StepResponse.StepSuccess
-import com.github.sua.extraction.parser.results.PartialResultsParser
-import com.github.sua.extraction.step.results.partial.DashboardPartialResultsStep
+import com.github.sua.integration.exception.ExtractorException
+import com.github.sua.integration.exception.ParserException
+import com.github.sua.integration.siga.extraction.extractor.results.partial.DashboardPartialResultsExtractor
+import com.github.sua.integration.siga.extraction.extractor.results.partial.DashboardPartialResultsExtractorRequest
+import com.github.sua.integration.siga.extraction.extractor.results.partial.DashboardPartialResultsExtractorResponse
+import com.github.sua.integration.siga.step.StepResponse.StepError
+import com.github.sua.integration.siga.step.StepResponse.StepSuccess
+import com.github.sua.integration.siga.parser.results.PartialResultsParser
+import com.github.sua.integration.siga.step.results.partial.DashboardPartialResultsStep
 import org.junit.Assert.assertThrows
 import io.mockk.every
 import io.mockk.mockk

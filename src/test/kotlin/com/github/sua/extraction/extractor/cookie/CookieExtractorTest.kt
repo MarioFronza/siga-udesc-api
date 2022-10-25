@@ -1,12 +1,12 @@
 package com.github.sua.extraction.extractor.cookie
 
-import com.github.sua.extraction.step.StepResponse.StepError
-import com.github.sua.extraction.step.StepResponse.StepSuccess
-import com.github.sua.extraction.exception.ExtractorException
-import com.github.sua.extraction.exception.ParserException
-import com.github.sua.extraction.extractor.login.CookieExtractor
-import com.github.sua.extraction.parser.cookie.CookieParser
-import com.github.sua.extraction.step.login.CookieStep
+import com.github.sua.integration.siga.step.StepResponse.StepError
+import com.github.sua.integration.siga.step.StepResponse.StepSuccess
+import com.github.sua.integration.exception.ExtractorException
+import com.github.sua.integration.exception.ParserException
+import com.github.sua.integration.siga.extraction.extractor.login.CookieExtractor
+import com.github.sua.integration.siga.parser.cookie.CookieParser
+import com.github.sua.integration.siga.step.login.CookieStep
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertThrows
