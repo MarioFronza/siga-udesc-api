@@ -11,9 +11,8 @@ import com.github.sua.usecase.integration.SemesterResultsIntegration
 import com.github.sua.usecase.integration.dto.IntegrationOutput
 import com.github.sua.usecase.integration.dto.IntegrationOutput.IntegrationSuccess
 import com.github.sua.usecase.integration.dto.period.PeriodInput
-import com.github.sua.usecase.integration.dto.results.SemesterResultsIntegrationInput
-import com.github.sua.usecase.integration.dto.results.SemesterResultsIntegrationOutput
-import com.github.sua.usecase.integration.dto.results.StudentSemesterResultsIntegrationOutput
+import com.github.sua.usecase.retrieve.dto.SemesterResultsIntegrationInput
+import com.github.sua.usecase.retrieve.dto.StudentSemesterResultsIntegrationOutput
 
 class DefaultSemesterResultsIntegration(
     private val dashboardExtraction: DashboardExtraction,

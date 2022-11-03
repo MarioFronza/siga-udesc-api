@@ -1,9 +1,7 @@
 package com.github.sua.integration.siga.parser.results
 
-import com.github.sua.usecase.dto.output.extraction.SemesterResult
-import com.github.sua.usecase.dto.output.extraction.SemesterResultsResponse
-import com.github.sua.usecase.integration.dto.results.SemesterResultIntegrationOutput
-import com.github.sua.usecase.integration.dto.results.SemesterResultsIntegrationOutput
+import com.github.sua.usecase.retrieve.dto.SemesterResultIntegrationOutput
+import com.github.sua.usecase.retrieve.dto.SemesterResultsIntegrationOutput
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 

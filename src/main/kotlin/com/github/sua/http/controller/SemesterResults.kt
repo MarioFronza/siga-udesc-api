@@ -3,8 +3,7 @@ package com.github.sua.http.controller
 import com.github.sua.http.extension.getRequiredParameter
 import com.github.sua.usecase.integration.dto.credential.SigaCredentialInput
 import com.github.sua.usecase.integration.dto.period.PeriodInput
-import com.github.sua.usecase.dto.input.extraction.SemesterResultsInput
-import com.github.sua.usecase.integration.dto.results.SemesterResultsIntegrationInput
+import com.github.sua.usecase.retrieve.dto.SemesterResultsIntegrationInput
 import com.github.sua.usecase.retrieve.RetrieveSemesterResults
 import io.ktor.server.application.*
 import io.ktor.server.locations.*

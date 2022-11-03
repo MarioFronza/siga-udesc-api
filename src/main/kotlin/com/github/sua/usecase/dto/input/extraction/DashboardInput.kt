@@ -1,7 +1,7 @@
 package com.github.sua.usecase.dto.input.extraction
 
 import com.github.sua.usecase.integration.dto.credential.SigaCredentialInput
-import com.github.sua.usecase.integration.dto.results.SemesterResultsIntegrationInput
+import com.github.sua.usecase.retrieve.dto.SemesterResultsIntegrationInput
 
 data class DashboardInput(
     val sigaCredential: SigaCredentialInput,

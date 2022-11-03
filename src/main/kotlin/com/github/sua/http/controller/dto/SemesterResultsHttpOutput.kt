@@ -1,23 +1,22 @@
-package com.github.sua.usecase.integration.dto.results
+package com.github.sua.http.controller.dto
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class StudentSemesterResultsIntegrationOutput(
+data class StudentSemesterResultsHttpOutput(
     val studentName: String,
-    val semesterResults: SemesterResultsIntegrationOutput,
+    val semesterResults: SemesterResultsHttpOutput,
 )
 
-
 @Serializable
-data class SemesterResultsIntegrationOutput(
+data class SemesterResultsHttpOutput(
     val period: String,
     val course: String,
-    val semesterResults: List<SemesterResultIntegrationOutput>,
+    val semesterResults: List<SemesterResultHttpOutput>,
 )
 
 @Serializable
-data class SemesterResultIntegrationOutput(
+data class SemesterResultHttpOutput(
     val subjectName: String,
     val groupName: String,
     val finalGrade: Double,
