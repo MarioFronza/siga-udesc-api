@@ -1,6 +1,7 @@
 package com.github.sua.integration.siga.extraction.extractor.results.partial
 
 import com.github.sua.integration.exception.ExtractorException
+import com.github.sua.integration.siga.extraction.extractor.results.semester.SemesterResultsExtractorRequest
 import com.github.sua.integration.siga.parser.results.PartialResultsParser
 import com.github.sua.integration.siga.step.StepResponse.StepSuccess
 import com.github.sua.integration.siga.step.results.partial.DashboardPartialResultsStep
@@ -29,4 +30,10 @@ data class DashboardPartialResultsExtractorRequest(
 
 data class DashboardPartialResultsExtractorResponse(
     val endpoint: String
-)
+){
+    fun toPartialResultsExtractorRequest(sessionId: String, etts: String) = PartialResultsExtractorRequest(
+        endpoint = endpoint,
+        sessionId = sessionId,
+        etts = etts
+    )
+}

@@ -10,9 +10,8 @@ import com.github.sua.usecase.dto.input.extraction.DashboardInput.Companion.from
 import com.github.sua.usecase.integration.SemesterResultsIntegration
 import com.github.sua.usecase.integration.dto.IntegrationOutput
 import com.github.sua.usecase.integration.dto.IntegrationOutput.IntegrationSuccess
-import com.github.sua.usecase.integration.dto.period.PeriodInput
-import com.github.sua.usecase.retrieve.dto.SemesterResultsIntegrationInput
-import com.github.sua.usecase.retrieve.dto.StudentSemesterResultsIntegrationOutput
+import com.github.sua.usecase.retrieve.dto.input.SemesterResultsIntegrationInput
+import com.github.sua.usecase.retrieve.dto.output.StudentSemesterResultsIntegrationOutput
 
 class DefaultSemesterResultsIntegration(
     private val dashboardExtraction: DashboardExtraction,
@@ -38,14 +37,12 @@ class DefaultSemesterResultsIntegration(
             )
         )
 
-        val periodIdentified = semesterResultsResponse.periodsIdentified.getIdentifiedBy(
-            key = getPeriodKeyBy(input.period)
-        )
-
         val semesterResultsByPeriodExtractorResponse = semesterResultsByPeriodExtractor.extract(
             request = semesterResultsResponse.toSemesterResultsByPeriodExtractorRequest(
                 etts = dashboardExtractionResponse.loginRedirectExtractorResponseEtts,
-                periodIdentified = periodIdentified
+                periodIdentified = semesterResultsResponse.periodsIdentified.getIdentifiedBy(
+                    key = input.period.toKeyString()
+                )
             )
         )
 
@@ -56,7 +53,5 @@ class DefaultSemesterResultsIntegration(
             )
         )
     }
-
-    private fun getPeriodKeyBy(period: PeriodInput) = "${period.year}/${period.term}"
 
 }

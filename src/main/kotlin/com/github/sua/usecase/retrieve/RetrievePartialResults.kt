@@ -1,14 +1,17 @@
 package com.github.sua.usecase.retrieve
 
-import com.github.sua.usecase.dto.input.extraction.PartialResultsInput
-import com.github.sua.usecase.dto.output.extraction.StudentPartialOutput
-import com.github.sua.usecase.extraction.PartialResultsExtraction
+import com.github.sua.usecase.retrieve.dto.input.PartialResultsIntegrationInput
+import com.github.sua.usecase.integration.PartialResultsIntegration
+import com.github.sua.usecase.retrieve.dto.output.RetrieveOutput
+import com.github.sua.usecase.retrieve.dto.output.RetrieveOutput.Companion.createOutputFromIntegrationResponse
+import com.github.sua.usecase.retrieve.dto.output.StudentPartialResultsIntegrationOutput
 
 class RetrievePartialResults(
-    private val partialResultsExtraction: PartialResultsExtraction
-    ) {
+    private val partialResultsIntegration: PartialResultsIntegration
+) {
 
-    fun retrieve(input: PartialResultsInput): StudentPartialOutput {
-        return partialResultsExtraction.extract(input)
+    fun retrieve(input: PartialResultsIntegrationInput): RetrieveOutput<StudentPartialResultsIntegrationOutput> {
+        val integrationResponse = partialResultsIntegration.integrate(input)
+        return createOutputFromIntegrationResponse(integrationResponse)
     }
 }

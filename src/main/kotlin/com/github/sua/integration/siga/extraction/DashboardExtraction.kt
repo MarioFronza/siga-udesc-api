@@ -5,6 +5,7 @@ import com.github.sua.integration.siga.extraction.extractor.dashboard.DashboardE
 import com.github.sua.integration.siga.extraction.extractor.dashboard.DashboardRedirectExtractor
 import com.github.sua.integration.siga.extraction.extractor.dashboard.DashboardRedirectExtractorRequest
 import com.github.sua.integration.siga.extraction.extractor.login.*
+import com.github.sua.integration.siga.extraction.extractor.results.partial.DashboardPartialResultsExtractorRequest
 import com.github.sua.integration.siga.extraction.extractor.results.semester.DashboardSemesterResultsExtractorRequest
 import com.github.sua.usecase.dto.input.extraction.DashboardInput
 
@@ -69,6 +70,12 @@ data class DashboardExtractionResponse(
     val loginRedirectExtractorResponseEtts: String
 ) {
     fun toDashboardSemesterResultsExtractorRequest() = DashboardSemesterResultsExtractorRequest(
+        endpoint = dashboardResponseEndpoint,
+        sessionId = cookieExtractorResponseSessionId,
+        etts = loginRedirectExtractorResponseEtts
+    )
+
+    fun toDashboardPartialResultsExtractorRequest() = DashboardPartialResultsExtractorRequest(
         endpoint = dashboardResponseEndpoint,
         sessionId = cookieExtractorResponseSessionId,
         etts = loginRedirectExtractorResponseEtts

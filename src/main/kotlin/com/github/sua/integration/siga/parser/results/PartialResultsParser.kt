@@ -3,6 +3,9 @@ package com.github.sua.integration.siga.parser.results
 import com.github.sua.integration.exception.ParserException
 import com.github.sua.usecase.dto.output.extraction.PartialResult
 import com.github.sua.usecase.dto.output.extraction.PartialResults
+import com.github.sua.usecase.retrieve.dto.input.PartialResultsIntegrationInput
+import com.github.sua.usecase.retrieve.dto.output.PartialResultIntegrationOutput
+import com.github.sua.usecase.retrieve.dto.output.PartialResultsIntegrationOutput
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
@@ -13,14 +16,14 @@ class PartialResultsParser {
         periodIdentified: String,
         courseIdentified: String,
         subjectIdentified: String,
-    ): PartialResults {
+    ): PartialResultsIntegrationOutput {
         val document = Jsoup.parse(responseContent)
         val termSelect = document.getElementById("lPeriodoLetivo")!!
         val courseSelect = document.getElementById("lCurso")!!
         val subjectSelect = document.getElementById("lDisciplina")!!
         val resultSpan = document.getElementById("resultado")!!
 
-        return PartialResults(
+        return PartialResultsIntegrationOutput(
             course = extractCourse(courseSelect, courseIdentified),
             period = extractPeriod(termSelect, periodIdentified),
             subjectName = extractSubject(subjectSelect, subjectIdentified),
@@ -43,9 +46,9 @@ class PartialResultsParser {
         return firstTerm.text()
     }
 
-    private fun extractPartialResultsBy(resultSpan: Element): MutableList<PartialResult> {
+    private fun extractPartialResultsBy(resultSpan: Element): MutableList<PartialResultIntegrationOutput> {
         val table = resultSpan.select("center > table.delimitador > tbody").first()
-        val partialResults = mutableListOf<PartialResult>()
+        val partialResults = mutableListOf<PartialResultIntegrationOutput>()
         table?.children()?.mapIndexed { index, row ->
             if (row.childrenSize() == 5 && index != 0 && row.getElementsContainingText("Média Parcial").size == 0) {
                 partialResults.add(extractPartialResultsData(row))
@@ -54,14 +57,14 @@ class PartialResultsParser {
         return partialResults
     }
 
-    private fun extractPartialResultsData(subjectRow: Element): PartialResult {
+    private fun extractPartialResultsData(subjectRow: Element): PartialResultIntegrationOutput {
         val code = subjectRow.child(0).text()
         val resultName = subjectRow.child(1).text()
         val date = subjectRow.child(2).text()
         val result = subjectRow.child(3).text().toDouble()
         val classLoad = subjectRow.child(4).text().toDouble()
 
-        return PartialResult(
+        return PartialResultIntegrationOutput(
             code = code,
             resultName = resultName,
             date = date,

@@ -15,7 +15,6 @@ import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
     install(Locations)
-    install(CallLogging)
 
     val retrieveStudentInfo by inject<RetrieveStudentInfo>()
     val retrieveSemesterResults by inject<RetrieveSemesterResults>()

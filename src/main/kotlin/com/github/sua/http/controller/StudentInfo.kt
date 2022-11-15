@@ -1,7 +1,7 @@
 package com.github.sua.http.controller
 
 import com.github.sua.http.extension.getRequiredParameter
-import com.github.sua.usecase.integration.dto.credential.SigaCredentialInput
+import com.github.sua.usecase.retrieve.dto.input.SigaCredentialInput
 import com.github.sua.usecase.retrieve.RetrieveStudentInfo
 import io.ktor.server.application.*
 import io.ktor.server.locations.*

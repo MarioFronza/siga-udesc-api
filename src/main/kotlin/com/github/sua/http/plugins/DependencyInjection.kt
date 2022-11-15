@@ -1,7 +1,6 @@
 package com.github.sua.http.plugins
 
 import com.github.sua.integration.siga.extraction.DashboardExtraction
-import com.github.sua.integration.siga.extraction.DefaultPartialResultsExtraction
 import com.github.sua.integration.siga.extraction.extractor.dashboard.DashboardExtractor
 import com.github.sua.integration.siga.extraction.extractor.dashboard.DashboardRedirectExtractor
 import com.github.sua.integration.siga.extraction.extractor.login.CookieExtractor
@@ -15,6 +14,7 @@ import com.github.sua.integration.siga.extraction.extractor.results.semester.Sem
 import com.github.sua.integration.siga.extraction.extractor.results.semester.SemesterResultsExtractor
 import com.github.sua.integration.http.ConnectorHttpClient
 import com.github.sua.integration.http.ktor.KtorHttpClient
+import com.github.sua.integration.siga.DefaultPartialResultsIntegration
 import com.github.sua.integration.siga.DefaultSemesterResultsIntegration
 import com.github.sua.integration.siga.parser.cookie.CookieParser
 import com.github.sua.integration.siga.parser.dashboard.DashboardParser
@@ -31,7 +31,7 @@ import com.github.sua.integration.siga.step.results.partial.PartialResultsStep
 import com.github.sua.integration.siga.step.results.semester.DashboardSemesterResultsStep
 import com.github.sua.integration.siga.step.results.semester.SemesterResultsByPeriodStep
 import com.github.sua.integration.siga.step.results.semester.SemesterResultsStep
-import com.github.sua.usecase.extraction.PartialResultsExtraction
+import com.github.sua.usecase.integration.PartialResultsIntegration
 import com.github.sua.usecase.integration.SemesterResultsIntegration
 import com.github.sua.usecase.retrieve.RetrievePartialResults
 import com.github.sua.usecase.retrieve.RetrieveSemesterResults
@@ -81,11 +81,11 @@ val appModule = module(createdAtStart = true) {
     single { PartialResultsByPeriodExtractor(get(), get()) }
     single { DashboardExtraction(get(), get(), get(), get(), get()) }
 
-    single<PartialResultsExtraction> {
-        DefaultPartialResultsExtraction(get(), get(), get(), get())
-    }
     single<SemesterResultsIntegration> {
         DefaultSemesterResultsIntegration(get(), get(), get(), get())
+    }
+    single<PartialResultsIntegration> {
+        DefaultPartialResultsIntegration(get(), get(), get(), get())
     }
 
     single { RetrieveSemesterResults(get()) }
