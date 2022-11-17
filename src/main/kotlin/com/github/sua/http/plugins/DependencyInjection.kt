@@ -16,6 +16,7 @@ import com.github.sua.integration.http.ConnectorHttpClient
 import com.github.sua.integration.http.ktor.KtorHttpClient
 import com.github.sua.integration.siga.DefaultPartialResultsIntegration
 import com.github.sua.integration.siga.DefaultSemesterResultsIntegration
+import com.github.sua.integration.siga.DefaultStudentInfoIntegration
 import com.github.sua.integration.siga.parser.cookie.CookieParser
 import com.github.sua.integration.siga.parser.dashboard.DashboardParser
 import com.github.sua.integration.siga.parser.results.PartialResultsParser
@@ -33,6 +34,7 @@ import com.github.sua.integration.siga.step.results.semester.SemesterResultsByPe
 import com.github.sua.integration.siga.step.results.semester.SemesterResultsStep
 import com.github.sua.usecase.integration.PartialResultsIntegration
 import com.github.sua.usecase.integration.SemesterResultsIntegration
+import com.github.sua.usecase.integration.StudentInfoIntegration
 import com.github.sua.usecase.retrieve.RetrievePartialResults
 import com.github.sua.usecase.retrieve.RetrieveSemesterResults
 import com.github.sua.usecase.retrieve.RetrieveStudentInfo
@@ -86,6 +88,9 @@ val appModule = module(createdAtStart = true) {
     }
     single<PartialResultsIntegration> {
         DefaultPartialResultsIntegration(get(), get(), get(), get())
+    }
+    single<StudentInfoIntegration> {
+        DefaultStudentInfoIntegration(get(), get(), get(), get(), get(), get(), get())
     }
 
     single { RetrieveSemesterResults(get()) }

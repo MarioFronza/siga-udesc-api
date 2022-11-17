@@ -1,9 +1,6 @@
 package com.github.sua.integration.siga.parser.results
 
 import com.github.sua.integration.exception.ParserException
-import com.github.sua.usecase.dto.output.extraction.PartialResult
-import com.github.sua.usecase.dto.output.extraction.PartialResults
-import com.github.sua.usecase.retrieve.dto.input.PartialResultsIntegrationInput
 import com.github.sua.usecase.retrieve.dto.output.PartialResultIntegrationOutput
 import com.github.sua.usecase.retrieve.dto.output.PartialResultsIntegrationOutput
 import org.jsoup.Jsoup
@@ -66,10 +63,10 @@ class PartialResultsParser {
 
         return PartialResultIntegrationOutput(
             code = code,
-            resultName = resultName,
+            evaluationName = resultName,
             date = date,
             classLoad = classLoad,
-            result = result
+            finalGrade = result
         )
     }
 

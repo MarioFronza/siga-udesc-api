@@ -15,12 +15,19 @@ data class PartialResultsIntegrationOutput(
     val subjectName: String,
     val results: List<PartialResultIntegrationOutput>
 )
-
 @Serializable
 data class PartialResultIntegrationOutput(
     val code: String,
-    val resultName: String,
+    val evaluationName: String,
     val date: String,
     val classLoad: Double,
-    val result: Double,
-)
+    val finalGrade: Double,
+){
+    fun toStudentInfoPartialResult() = StudentInfoPartialResult(
+        code = code ,
+        evaluationName = evaluationName,
+        date = date,
+        classLoad= classLoad,
+        finalGrade = finalGrade
+    )
+}

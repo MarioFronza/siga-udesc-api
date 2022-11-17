@@ -7,7 +7,7 @@ import com.github.sua.integration.siga.extraction.extractor.dashboard.DashboardR
 import com.github.sua.integration.siga.extraction.extractor.login.*
 import com.github.sua.integration.siga.extraction.extractor.results.partial.DashboardPartialResultsExtractorRequest
 import com.github.sua.integration.siga.extraction.extractor.results.semester.DashboardSemesterResultsExtractorRequest
-import com.github.sua.usecase.dto.input.extraction.DashboardInput
+import com.github.sua.integration.siga.extraction.dto.DashboardInput
 
 class DashboardExtraction(
     private val cookieExtractor: CookieExtractor,

@@ -11,7 +11,7 @@ class PartialResultsStep(
 
     fun doRequest(request: PartialResultsExtractorRequest): StepResponse {
         val headers = mapOf(
-            "Cookie" to "${request.sessionId}; ${request.etts}"
+            "Cookie" to "${request.sessionId}; ECS=S; ${request.etts}"
         )
 
         return httpClient.get(

@@ -1,11 +1,9 @@
 package com.github.sua.integration.siga.extraction.extractor.results.partial
 
 import com.github.sua.integration.exception.ExtractorException
-import com.github.sua.usecase.dto.output.extraction.PartialResults
 import com.github.sua.integration.siga.parser.results.PartialResultsParser
 import com.github.sua.integration.siga.step.StepResponse.StepSuccess
 import com.github.sua.integration.siga.step.results.partial.PartialResultsByPeriodStep
-import com.github.sua.usecase.retrieve.dto.output.PartialResultIntegrationOutput
 import com.github.sua.usecase.retrieve.dto.output.PartialResultsIntegrationOutput
 
 class PartialResultsByPeriodExtractor(
@@ -23,6 +21,7 @@ class PartialResultsByPeriodExtractor(
                     request.subjectIdentified,
                 )
             )
+
             else -> throw ExtractorException("Partial results extractor unexpected error")
         }
     }

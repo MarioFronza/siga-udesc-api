@@ -6,7 +6,7 @@ import com.github.sua.integration.siga.extraction.extractor.results.semester.Sem
 import com.github.sua.integration.siga.extraction.extractor.results.semester.SemesterResultsExtractor
 import com.github.sua.integration.siga.extraction.misc.utils.getIdentifiedBy
 import com.github.sua.integration.siga.parser.dashboard.DashboardParser.Companion.SEMESTER_RESULT_PAGE
-import com.github.sua.usecase.dto.input.extraction.DashboardInput.Companion.fromSemesterResultsIntegrationInput
+import com.github.sua.integration.siga.extraction.dto.DashboardInput.Companion.fromSemesterResultsIntegrationInput
 import com.github.sua.usecase.integration.SemesterResultsIntegration
 import com.github.sua.usecase.integration.dto.IntegrationOutput
 import com.github.sua.usecase.integration.dto.IntegrationOutput.IntegrationSuccess

@@ -1,7 +1,10 @@
 package com.github.sua.integration.siga.parser.results
 
+import com.github.sua.integration.siga.extraction.extractor.results.partial.PartialResultsByPeriodExtractorResponse
 import com.github.sua.usecase.retrieve.dto.output.SemesterResultIntegrationOutput
 import com.github.sua.usecase.retrieve.dto.output.SemesterResultsIntegrationOutput
+import com.github.sua.usecase.retrieve.dto.output.StudentInfoSemesterResult
+import com.github.sua.usecase.retrieve.dto.output.StudentInfoSemesterResults
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
@@ -99,6 +102,13 @@ class SemesterResultsParser {
             course = course,
             semesterResults = semesterResults.map { it.toSemesterResult() }
         )
+
+        fun toStudentInfoSemesterResults(partialResults: List<PartialResultsByPeriodExtractorResponse>) =
+            StudentInfoSemesterResults(
+                period = period,
+                course = course,
+                semesterResults = semesterResults.map { it.toStudentInfoSemesterResult(partialResults) }
+            )
     }
 
     data class SemesterResultOutput(
@@ -119,6 +129,22 @@ class SemesterResultsParser {
             attendancePercentage = attendancePercentage,
             result = result
         )
+
+        fun toStudentInfoSemesterResult(partialResults: List<PartialResultsByPeriodExtractorResponse>) =
+            StudentInfoSemesterResult(
+                subjectName = subjectName,
+                groupName = groupName,
+                finalGrade = finalGrade,
+                courseLoad = courseLoad,
+                absencesCount = absencesCount,
+                attendancePercentage = attendancePercentage,
+                result = result,
+                partialResults = partialResults.flatMap {
+                    it.partialResults.results.map { result ->
+                        result.toStudentInfoPartialResult()
+                    }
+                }
+            )
     }
 
 }

@@ -18,8 +18,6 @@ fun Route.studentInfo(
         cpf = call.getRequiredParameter("cpf"),
         password = call.getRequiredParameter("password")
     )
-
-    service.retrieve(input)
-
-    call.respond(mapOf("retrieve" to "ok"))
+    val response = service.retrieve(input).getOutputContent()
+    call.respond(response)
 }
