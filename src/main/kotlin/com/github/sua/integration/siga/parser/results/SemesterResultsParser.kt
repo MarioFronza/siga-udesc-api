@@ -103,11 +103,11 @@ class SemesterResultsParser {
             semesterResults = semesterResults.map { it.toSemesterResult() }
         )
 
-        fun toStudentInfoSemesterResults(partialResults: List<PartialResultsByPeriodExtractorResponse>) =
+        fun toStudentInfoSemesterResults(semesterResults: List<StudentInfoSemesterResult>) =
             StudentInfoSemesterResults(
                 period = period,
                 course = course,
-                semesterResults = semesterResults.map { it.toStudentInfoSemesterResult(partialResults) }
+                semesterResults = semesterResults
             )
     }
 

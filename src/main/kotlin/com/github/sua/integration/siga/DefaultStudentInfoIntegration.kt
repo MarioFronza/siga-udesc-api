@@ -30,8 +30,7 @@ class DefaultStudentInfoIntegration(
 
     override fun integrate(input: SigaCredentialInput): IntegrationOutput<StudentInfoOutput> {
         try {
-
-            var dashboardExtractionResponse = dashboardExtraction.extract(
+            val dashboardExtractionResponse = dashboardExtraction.extract(
                 input = fromSigaCredentialInput(input),
                 resultPageType = SEMESTER_RESULT_PAGE
             )
@@ -47,7 +46,7 @@ class DefaultStudentInfoIntegration(
                 )
             )
 
-            val semesterResults = semesterResultsResponse.periodsIdentified.map { periodIdentified ->
+            val studentSemesterResults = semesterResultsResponse.periodsIdentified.map { periodIdentified ->
                 semesterResultsByPeriodExtractor.extract(
                     request = semesterResultsResponse.toSemesterResultsByPeriodExtractorRequest(
                         etts = dashboardExtractionResponse.loginRedirectExtractorResponseEtts,
@@ -64,26 +63,26 @@ class DefaultStudentInfoIntegration(
                     )
                 )
 
-                dashboardExtractionResponse = dashboardExtraction.extract(
+                val dashboardPartialResultsExtractionResponse = dashboardExtraction.extract(
                     input = fromSigaCredentialInput(input),
                     resultPageType = PARTIAL_RESULT_PAGE
                 )
 
                 val dashboardPartialResultsExtractorResponse = dashboardPartialResultsExtractor.extract(
-                    request = dashboardExtractionResponse.toDashboardPartialResultsExtractorRequest()
+                    request = dashboardPartialResultsExtractionResponse.toDashboardPartialResultsExtractorRequest()
                 )
 
                 val partialResultsResponse = partialResultsExtractor.extract(
                     request = dashboardPartialResultsExtractorResponse.toPartialResultsExtractorRequest(
-                        sessionId = dashboardExtractionResponse.cookieExtractorResponseSessionId,
-                        etts = dashboardExtractionResponse.loginRedirectExtractorResponseEtts
+                        sessionId = dashboardPartialResultsExtractionResponse.cookieExtractorResponseSessionId,
+                        etts = dashboardPartialResultsExtractionResponse.loginRedirectExtractorResponseEtts
                     )
                 )
 
                 partialResultsResponse.subjectsIdentified.map { subjectIdentified ->
                     partialResultsByPeriodExtractor.extract(
                         request = partialResultsResponse.toPartialResultsByPeriodExtractorRequest(
-                            etts = dashboardExtractionResponse.loginRedirectExtractorResponseEtts,
+                            etts = dashboardPartialResultsExtractionResponse.loginRedirectExtractorResponseEtts,
                             periodIdentified = periodIdentified.value,
                             courseIdentified = partialResultsResponse.coursesIdentified.getIdentifiedBy(key = "Engenharia de Software"),
                             subjectIdentified = subjectIdentified.value
@@ -95,10 +94,15 @@ class DefaultStudentInfoIntegration(
             return IntegrationSuccess(
                 data = StudentInfoOutput(
                     studentName = dashboardExtractionResponse.studentName,
-                    semesterResults = semesterResults.map {
-                        it.semesterResults.toStudentInfoSemesterResults(
-                            partialResults
-                        )
+                    semesterResults = studentSemesterResults.map { studentSemesterResult ->
+                        val partialResultsByPeriod = partialResults.filter { result ->
+                            result.partialResults.period == studentSemesterResult.semesterResults.period
+                        }
+                        val semesterResultsByPeriod =
+                            studentSemesterResult.semesterResults.semesterResults.map { result ->
+                                result.toStudentInfoSemesterResult(partialResultsByPeriod)
+                            }
+                        studentSemesterResult.semesterResults.toStudentInfoSemesterResults(semesterResultsByPeriod)
                     }
                 )
             )
